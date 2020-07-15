@@ -5,7 +5,7 @@
             <span>报表</span>
         </router-link>
 
-        <router-link class="item" to="/money" active-class="selected">
+        <router-link class="item" to="/money" active-class="selected" >
             <Icon name="add"/>
             <span>记一笔</span>
         </router-link>
@@ -27,7 +27,6 @@
     components: {Icon}
   })
   export default class Nav extends Vue {
-
   }
 </script>
 

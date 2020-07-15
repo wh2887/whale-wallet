@@ -7,10 +7,13 @@
     </div>
 </template>
 
-<script lang="js">
-  export default {
-    props: ['classPrefix'],
-    name: 'Layout'
+<script lang="ts">
+  import Vue from 'vue';
+  import {Component, Prop} from 'vue-property-decorator';
+
+  @Component
+  export default class Layout extends Vue {
+    @Prop() classPrefix: string | undefined;
   }
 </script>
 <style lang="scss" scoped>

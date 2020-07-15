@@ -5,9 +5,7 @@ $font-song: Georgia, "Nimbus Roman No9 L", "Songti SC", "Noto Serif CJK SC", "So
 $color-highlight: #00ADB5;
 $color-nearblack: #3E3A39;
 $color-background: #E5E5E5;
-//placeholder
-//选择器是什么不知道，但是我知道里面的内容是什么
-//先写好样式，然后使用的时候再加选择器
+
 %clearFix {
     &::after {
         content: '';
@@ -16,7 +14,7 @@ $color-background: #E5E5E5;
     }
 }
 
-$color-shadow: rgba(0, 0, 0, 0.45);
+$color-shadow: rgba(0, 0, 0, 0.25);
 %outerShadow {
     box-shadow: 0 0 3px $color-shadow;
 }
