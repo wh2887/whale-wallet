@@ -1,33 +1,28 @@
 <template>
-    <div class="wrapper">
-        <div class="content">
-            1
+    <div class="layout-wrapper" :class=" classPrefix && `${classPrefix}-wrapper` ">
+        <div class="content" :class=" classPrefix && `${classPrefix}-content`">
+            <slot/>
         </div>
         <Nav/>
     </div>
 </template>
 
-<script lang="ts">
-  import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
-  import Nav from '@/components/Nav.vue';
-
-  @Component({
-    components: {Nav}
-  })
-  export default class Layout extends Vue {
-
+<script lang="js">
+  export default {
+    props: ['classPrefix'],
+    name: 'Layout'
   }
 </script>
-
 <style lang="scss" scoped>
-    .wrapper {
+    @import "~@/assets/styles/helper.scss";
+
+    .layout-wrapper {
         display: flex;
         flex-direction: column;
         height: 100vh;
+        background: $color-background;
 
         > .content {
-            border: 1px solid red;
             flex-grow: 1;
             overflow: auto;
         }

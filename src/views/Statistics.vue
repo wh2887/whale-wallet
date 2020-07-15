@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <Layout>
         报表
-    </div>
+    </Layout>
 </template>
 
 <script lang="ts">

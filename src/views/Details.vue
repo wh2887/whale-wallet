@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        更多
+        123
     </Layout>
 </template>
 
@@ -9,11 +9,10 @@
   import {Component} from 'vue-property-decorator';
 
   @Component
-  export default class More extends Vue {
+  export default class Money extends Vue {
 
   }
 </script>
 
 <style lang="scss" scoped>
-
 </style>
