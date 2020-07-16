@@ -1,7 +1,12 @@
 <template>
-    <Layout class-prefix="layout" :money-to-layout="show" @getReply="toggle">
-        <div class="moneyBG" v-show="show">
-            <div>Money.vue</div>
+    <Layout class-prefix="layout">
+        <div class="moneyBG">
+            <Type/>
+
+<!--            <div>Output:输出</div>-->
+<!--            <div>Tags:标签分类</div>-->
+<!--            <div>Notes:备注</div>-->
+<!--            <div>NumberPad:数字按钮</div>-->
         </div>
     </Layout>
 </template>
@@ -9,14 +14,11 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-
-  @Component
+  import Type from '@/components/Money/Type.vue';
+  @Component({
+    components: {Type}
+  })
   export default class Money extends Vue {
-    show = true;
-
-    toggle(param: boolean) {
-      this.show = param;
-    }
   }
 </script>
 <style lang="scss">

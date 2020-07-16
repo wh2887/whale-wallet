@@ -5,7 +5,7 @@
             <span>报表</span>
         </router-link>
 
-        <router-link class="item" to="/money" active-class="selected" @click.native="toggle">
+        <router-link class="item" to="/details" active-class="selected" @click.native="toggle">
             <Icon name="add"/>
             <span>记一笔</span>
         </router-link>
