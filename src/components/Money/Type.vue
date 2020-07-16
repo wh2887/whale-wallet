@@ -36,6 +36,8 @@
         > div {
             padding: 0 35px 0 35px;
             border: 1px solid $color-highlight;
+            //收入 | 支出 不换行
+            white-space: nowrap;
         }
 
         > :nth-child(1) {
@@ -47,7 +49,7 @@
         }
 
         & .selected {
-            background: darken($color-highlight,8%);
+            background: darken($color-highlight, 8%);
         }
 
     }

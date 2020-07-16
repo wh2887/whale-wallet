@@ -2,6 +2,7 @@
     <Layout class-prefix="layout">
         <div class="moneyBG">
             <Type/>
+            <Output/>
 
 <!--            <div>Output:输出</div>-->
 <!--            <div>Tags:标签分类</div>-->
@@ -15,8 +16,9 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Type from '@/components/Money/Type.vue';
+  import Output from '@/components/Money/Output.vue';
   @Component({
-    components: {Type}
+    components: {Output, Type}
   })
   export default class Money extends Vue {
   }
@@ -32,6 +34,9 @@
             background: #ffffff;
             border-radius: 36px 36px 0 0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            flex-direction: column;
         }
     }
 </style>
