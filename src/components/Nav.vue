@@ -5,7 +5,7 @@
             <span>报表</span>
         </router-link>
 
-        <router-link class="item" to="/money" active-class="selected" >
+        <router-link class="item" to="/money" active-class="selected" @click.native="toggle">
             <Icon name="add"/>
             <span>记一笔</span>
         </router-link>
@@ -18,15 +18,21 @@
     </nav>
 </template>
 
-<script lang="ts">
-  import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
-  import Icon from '@/components/Icon.vue';
+<script>
+  export default {
+    props: ['MoneyToLayout'],
+    data() {
+      return {
+        replyWord: true
+      }
+    },
+    methods: {
+      toggle() {
+        this.replyWord = !this.replyWord
+        this.$emit('getReply', this.replyWord)
+      }
 
-  @Component({
-    components: {Icon}
-  })
-  export default class Nav extends Vue {
+    }
   }
 </script>
 

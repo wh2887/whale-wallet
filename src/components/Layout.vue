@@ -3,17 +3,14 @@
         <div class="content" :class=" classPrefix && `${classPrefix}-content`">
             <slot/>
         </div>
-        <Nav/>
+        <Nav v-bind="$attrs" v-on="$listeners"/>
     </div>
 </template>
 
-<script lang="ts">
-  import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+<script lang="js">
 
-  @Component
-  export default class Layout extends Vue {
-    @Prop() classPrefix: string | undefined;
+  export default {
+    props: ['classPrefix'],
   }
 </script>
 <style lang="scss" scoped>
