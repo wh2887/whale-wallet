@@ -18,20 +18,17 @@
     </nav>
 </template>
 
-<script>
-  export default {
-    props: ['MoneyToLayout'],
-    data() {
-      return {
-        replyWord: true
-      }
-    },
-    methods: {
-      toggle() {
-        this.replyWord = !this.replyWord
-        this.$emit('getReply', this.replyWord)
-      }
+<script lang="ts">
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
 
+  @Component
+  export default class Nav extends Vue {
+    replyWord = true;
+
+    toggle() {
+      this.replyWord = !this.replyWord;
+      this.$emit('getReply', this.replyWord);
     }
   }
 </script>
