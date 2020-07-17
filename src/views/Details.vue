@@ -1,7 +1,7 @@
 <template>
     <Layout :money-to-layout="show" @getReply="toggle">
         Details.vue
-        <Money v-show="show"/>
+        <Money v-show="show" class="money"/>
     </Layout>
 </template>
 
@@ -24,4 +24,7 @@
 </script>
 
 <style lang="scss" scoped>
+    .money{
+
+    }
 </style>

@@ -2,7 +2,7 @@
     <div class="output-wrapper">
         <Icon name="dog3"/>
         <label>
-            <input type="text">
+            <input type="text" maxlength="16">
         </label>
     </div>
 </template>

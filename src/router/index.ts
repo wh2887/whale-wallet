@@ -5,13 +5,14 @@ import More from '@/views/More.vue';
 import NotFound from '@/views/NotFound.vue';
 import Details from '@/views/Details.vue';
 import Money from '@/views/Money.vue';
+import Grandfather from '@/components/Grandfather.vue';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: '/details'
+    redirect: '/grandfather'
   },
   {
     path: '/details',
@@ -28,6 +29,10 @@ const routes: Array<RouteConfig> = [
   {
     path: '/more',
     component: More
+  },
+  {
+    path: '/grandfather',
+    component: Grandfather
   },
   {
     path: '*',
