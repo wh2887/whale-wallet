@@ -1,7 +1,22 @@
 <template>
-    <Layout :money-to-layout="show" @getReply="toggle">
-        Details.vue
+    <Layout :money-to-layout="show" @getReply="toggle" :class-prefix="layout">
         <Money v-show="show" class="money"/>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
     </Layout>
 </template>
 
@@ -23,8 +38,17 @@
   }
 </script>
 
-<style lang="scss" scoped>
-    .money{
-
+<style lang="scss">
+    .money {
+        position: absolute;
+        bottom: 0;
+        z-index: 1;
+        width: 100vw;
+        height: 96vh;
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        border-radius: 36px 36px 0 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
     }
 </style>

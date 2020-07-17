@@ -41,8 +41,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-
-
+        z-index: 3;
         .item {
             width: 33.3333%;
             padding: 5px 0;
