@@ -1,6 +1,7 @@
 <template>
     <div class="output-wrapper">
-        <Icon name="dog3"/>
+        <!--        <Icon name="dog3"/>-->
+        <IconWithBorder :name=" 'dog3' "/>
         <label>
             <input type="text" maxlength="16">
         </label>
@@ -10,8 +11,11 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import IconWithBorder from '@/components/IconWithBorder.vue';
 
-  @Component
+  @Component({
+    components: {IconWithBorder}
+  })
   export default class Output extends Vue {
 
   }
@@ -43,6 +47,7 @@
         > :nth-child(2) {
             position: absolute;
             right: 6px;
+
             > input {
                 @extend %clearFix;
                 text-align: right;

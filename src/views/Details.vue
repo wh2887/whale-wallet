@@ -1,5 +1,5 @@
 <template>
-    <Layout :money-to-layout="show" @getReply="toggle" :class-prefix="layout">
+    <Layout :money-to-layout="show" @getReply="toggle">
         <Money v-show="show" class="money"/>
         <div>1</div>
         <div>1</div>

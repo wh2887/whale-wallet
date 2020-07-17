@@ -38,6 +38,7 @@
 
     nav {
         @extend %outerShadow;
+        background: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;

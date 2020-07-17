@@ -3,14 +3,14 @@
         <div class="content" :class=" classPrefix && `${classPrefix}-content`">
             <slot/>
         </div>
-        <Nav v-bind="$attrs" v-on="$listeners" v-if=" !state "/>
+        <Nav v-bind="$attrs" v-on="$listeners" />
     </div>
 </template>
 
 <script lang="js">
 
   export default {
-    props: ['classPrefix','state'],
+    props: ['classPrefix'],
   }
 </script>
 <style lang="scss" scoped>

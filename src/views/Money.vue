@@ -2,8 +2,7 @@
     <div class="moneyBG">
         <Type/>
         <Output/>
-
-        <!--            <div>Output:输出</div>-->
+        <Tags/>
         <!--            <div>Tags:标签分类</div>-->
         <!--            <div>Notes:备注</div>-->
         <!--            <div>NumberPad:数字按钮</div>-->
@@ -15,9 +14,10 @@
   import {Component} from 'vue-property-decorator';
   import Type from '@/components/Money/Type.vue';
   import Output from '@/components/Money/Output.vue';
+  import Tags from '@/components/Money/Tags.vue';
 
   @Component({
-    components: {Output, Type}
+    components: {Tags, Output, Type}
   })
   export default class Money extends Vue {
   }
