@@ -1,6 +1,5 @@
 <template>
     <div class="output-wrapper">
-        <!--        <Icon name="dog3"/>-->
         <IconWithBorder :name=" 'dog3' "/>
         <label>
             <input type="text" maxlength="16">
@@ -42,11 +41,13 @@
             padding: 0 6px;
             border: 1px solid $color-highlight;
             border-radius: 10px;
+            z-index: 3;
         }
 
         > :nth-child(2) {
+            min-width: 40%;
             position: absolute;
-            right: 6px;
+            right: 10px;
 
             > input {
                 @extend %clearFix;

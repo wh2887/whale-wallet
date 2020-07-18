@@ -3,7 +3,7 @@
         <Type/>
         <Output/>
         <Tags/>
-        <!--            <div>Tags:标签分类</div>-->
+        <Notes/>
         <!--            <div>Notes:备注</div>-->
         <!--            <div>NumberPad:数字按钮</div>-->
     </div>
@@ -15,9 +15,10 @@
   import Type from '@/components/Money/Type.vue';
   import Output from '@/components/Money/Output.vue';
   import Tags from '@/components/Money/Tags.vue';
+  import Notes from '@/components/Money/Notes.vue';
 
   @Component({
-    components: {Tags, Output, Type}
+    components: {Notes, Tags, Output, Type}
   })
   export default class Money extends Vue {
   }

@@ -18,7 +18,6 @@
 
         font-size: 1.5em;
         line-height: 1.5em;
-        margin-left: 4px;
         padding: 0 6px;
         border: 1px solid $color-highlight;
         border-radius: 10px;
