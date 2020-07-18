@@ -24,6 +24,7 @@
     @import "~@/assets/styles/helper.scss";
 
     .output-wrapper {
+        font-family: Consolas monospace;
         width: 87vw;
         border: 1px solid $color-highlight;
         margin-top: 16px;
