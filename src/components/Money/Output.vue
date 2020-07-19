@@ -26,9 +26,9 @@
     .output-wrapper {
         font-family: Consolas monospace;
         width: 87vw;
+        min-height: 45px;
         border: 1px solid $color-highlight;
         margin-top: 16px;
-        line-height: 2.5em;
         border-radius: 10px;
         display: flex;
         flex-direction: row;

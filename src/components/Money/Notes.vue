@@ -20,8 +20,7 @@
     @import "~@/assets/styles/helper.scss";
     .notes-wrapper {
         position: relative;
-        margin-top: 23px;
-
+        margin-top: 20px;
         > label {
 
             width: 87vw;

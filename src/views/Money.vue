@@ -2,7 +2,7 @@
     <div class="moneyBG">
         <Type/>
         <Output/>
-        <Tags/>
+        <Tags :tag-data-source="tags"/>
         <Notes/>
         <NumberPad/>
         <!--            <div>NumberPad:数字按钮</div>-->
@@ -22,6 +22,53 @@
     components: {NumberPad, Notes, Tags, Output, Type}
   })
   export default class Money extends Vue {
+    tags: object[] = [
+
+      {
+        iconName: 'dog3',
+        tagText: '宠物'
+      },
+      {
+        iconName: 'breakfast',
+        tagText: '早餐'
+      },
+      // {
+      //   iconName: 'lunch',
+      //   tagText: '午餐'
+      // },
+      // {
+      //   iconName: 'dinner',
+      //   tagText: '晚餐'
+      // },
+      {
+        iconName: 'add1',
+        tagText: '添加'
+      },
+      {
+        iconName: 'bedroom',
+        tagText: '卧室'
+      },
+      {
+        iconName: 'traffic',
+        tagText: '交通'
+      },
+      {
+        iconName: 'grocery-shopping',
+        tagText: '买菜'
+      },
+      {
+        iconName: 'shuiguo',
+        tagText: '水果'
+      },
+      {
+        iconName: 'travel',
+        tagText: '旅行'
+      },
+      // {
+      //   iconName: 'close',
+      //   tagText: '服饰'
+      // },
+    ];
   }
 </script>
 <style lang="scss">

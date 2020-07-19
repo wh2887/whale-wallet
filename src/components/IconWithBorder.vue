@@ -15,7 +15,7 @@
     @import "~@/assets/styles/helper.scss";
 
     .icon-border {
-
+        width: 38px;
         font-size: 1.5em;
         line-height: 1.5em;
         padding: 0 6px;

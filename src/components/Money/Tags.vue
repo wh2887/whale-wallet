@@ -1,61 +1,45 @@
 <template>
     <div>
         <ol class="tags-list">
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
-            </li>
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
-            </li>
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
-            </li>
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
-            </li>
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
-            </li>
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
-            </li>
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
-            </li>
-            <li>
-                <IconWithBorder :name=" 'dog3' "/>
-                <span>宠物</span>
+            <li v-for="(tag,index) in TagDataSource" :key="index">
+                <IconWithBorder :name=" tag.iconName "/>
+                <span>{{tag.tagText}}</span>
             </li>
             <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
         </ol>
-        <div class="dots">
-            <span></span><span></span><span></span>
-        </div>
+        <ul class="dots">
+            <li :class=" type === '1' && 'selected'" @click="getPage('1')"></li>
+            <li :class=" type === '2' && 'selected'" @click="getPage('2')"></li>
+            <li :class=" type === '3' && 'selected'" @click="getPage('3')"></li>
+        </ul>
     </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Prop} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
 
   @Component({
     components: {IconWithBorder}
   })
   export default class Tags extends Vue {
+    @Prop() TagDataSource: string[] | undefined;
+    type = '1';
 
+    getPage(type: string) {
+      if (type !== '1' && type !== '2' && type !== '3') {
+        throw new Error('type is unknown');
+      } else {
+        this.type = type;
+      }
+    }
   }
 </script>
 
 <style lang="scss" scoped>
     @import "~@/assets/styles/helper.scss";
+
     .tags-list {
         width: 87vw;
         display: flex;
@@ -88,25 +72,19 @@
         justify-content: center;
         align-items: center;
         padding-top: 10px;
-        > :nth-child(1){
-            margin-right: 10px;
+        > li {
             width: 10px;
             height: 10px;
             border-radius: 50%;
             background: $color-d;
-        }
-        > :nth-child(2){
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: $color-highlight;
-        }
-        > :nth-child(3){
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: $color-d;
+            margin: 0 10px;
+
+            &.selected {
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: $color-highlight;
+            }
         }
     }
 </style>

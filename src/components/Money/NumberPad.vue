@@ -34,7 +34,8 @@
     .number-wrapper {
         @extend %clearFix;
         width: 87vw;
-        margin-top: 15px;
+        height: 322px;
+        margin-top: 8px;
         border: 1px solid $color-d;
         border-radius: 10px;
         font-family: Consolas monospace;
