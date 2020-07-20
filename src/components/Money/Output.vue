@@ -1,6 +1,6 @@
 <template>
     <div class="output-wrapper">
-        <IconWithBorder :name=" 'dog3' "/>
+        <IconWithBorder :name=" updateIcon "/>
         <label>
             <input type="text" maxlength="16">
         </label>
@@ -9,13 +9,15 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Prop} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
+
 
   @Component({
     components: {IconWithBorder}
   })
   export default class Output extends Vue {
+    @Prop() updateIcon = '';
 
   }
 </script>

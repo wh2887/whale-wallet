@@ -1,7 +1,7 @@
 <template>
     <div>
         <ol class="tags-list">
-            <li v-for="(tag,index) in TagDataSource" :key="index">
+            <li v-for="(tag) in tagDataSource" :key="tag.iconName" @click="$emit('update:icon',tag.iconName)">
                 <IconWithBorder :name=" tag.iconName "/>
                 <span>{{tag.tagText}}</span>
             </li>
@@ -19,12 +19,14 @@
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
+  import index from '@/store';
+
 
   @Component({
     components: {IconWithBorder}
   })
   export default class Tags extends Vue {
-    @Prop() TagDataSource: string[] | undefined;
+    @Prop() tagDataSource: string[] | undefined;
     type = '1';
 
     getPage(type: string) {
@@ -72,6 +74,7 @@
         justify-content: center;
         align-items: center;
         padding-top: 10px;
+
         > li {
             width: 10px;
             height: 10px;

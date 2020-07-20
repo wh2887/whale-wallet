@@ -1,11 +1,10 @@
 <template>
     <div class="moneyBG">
         <Type/>
-        <Output/>
-        <Tags :tag-data-source="tags"/>
+        <Output :update-icon="tagsName"/>
+        <Tags :tag-data-source="tags" v-on:update:icon="getIconName"/>
         <Notes/>
         <NumberPad/>
-        <!--            <div>NumberPad:数字按钮</div>-->
     </div>
 </template>
 
@@ -22,6 +21,7 @@
     components: {NumberPad, Notes, Tags, Output, Type}
   })
   export default class Money extends Vue {
+    tagsName = '';
     tags: object[] = [
 
       {
@@ -69,6 +69,10 @@
       //   tagText: '服饰'
       // },
     ];
+
+    getIconName(data: string) {
+      this.tagsName = data;
+    }
   }
 </script>
 <style lang="scss">
