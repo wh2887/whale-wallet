@@ -1,7 +1,9 @@
 <template>
     <div class="notes-wrapper">
+        {{value}}
         <label>
-            <input type="text" placeholder="添加备注">
+            <input type="text" placeholder="添加备注" v-model="value">
+<!--            <input type="text" placeholder="添加备注" :value="value" @input=" value = $event.target.value ">-->
         </label>
     </div>
 </template>
@@ -12,15 +14,17 @@
 
   @Component
   export default class Notes extends Vue {
-
+    value = '';
   }
 </script>
 
 <style lang="scss" scoped>
     @import "~@/assets/styles/helper.scss";
+
     .notes-wrapper {
         position: relative;
         margin-top: 20px;
+
         > label {
 
             width: 87vw;
@@ -32,6 +36,7 @@
                 padding: 0 15px;
                 border: 1px solid $color-d;
                 border-radius: 15px;
+
                 &::placeholder {
                     text-align: center;
                     color: $color-d;
