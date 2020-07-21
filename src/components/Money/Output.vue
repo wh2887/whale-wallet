@@ -2,7 +2,7 @@
     <div class="output-wrapper">
         <IconWithBorder :name=" updateIcon "/>
         <label>
-            <input type="text" :value="updateOutput">
+            <input type="text" :value="updateOutput || '0' ">
         </label>
     </div>
 </template>

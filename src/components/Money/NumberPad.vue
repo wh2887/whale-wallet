@@ -25,29 +25,37 @@
   @Component
   export default class NumberPad extends Vue {
 
-    output = '';
+    output = '0';
+
+    emit() {
+      this.$emit('update:output', this.output);
+    }
 
     inputContent(event: MouseEvent) {
+      this.emit();
       const button = (event.target as HTMLButtonElement);
       const input = button.textContent as string;
       if (this.output.length === 16) {return;}
+      if ('+'.indexOf(input)>=0) {
+        console.log('+'.indexOf(input));
+      }
       if (this.output === '0') {
         if ('0123456789'.indexOf(input) >= 0) {
           //如果是其中一个就直接替换默认的0位其中的
           this.output = input;
+          this.emit();
         } else {
           //如果输入点'.' 就直接往后加
           this.output += input;
+          this.emit();
         }
         return;
       }
       //判断 有.了，就不能再加.
       if (this.output.indexOf('.') >= 0 && input === '.') {return;}
-      if (input === '+') {
-        return;
-      }
+      //判断 有 + 了，就不能再加.
       this.output += input;
-      this.$emit('update:output', this.output);
+      this.emit();
     }
 
     //删除功能
