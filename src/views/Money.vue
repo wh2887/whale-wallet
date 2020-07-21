@@ -1,10 +1,10 @@
 <template>
     <div class="moneyBG">
         <Type/>
-        <Output :update-icon="tagsName"/>
+        <Output :update-icon="tagsName" :update-output="numberPadNum"/>
         <Tags :tag-data-source="tags" v-on:update:icon="getIconName"/>
         <Notes/>
-        <NumberPad/>
+        <NumberPad v-on:update:output=" getNumber "/>
     </div>
 </template>
 
@@ -22,6 +22,7 @@
   })
   export default class Money extends Vue {
     tagsName = '';
+    numberPadNum = '';
     tags: object[] = [
 
       {
@@ -32,14 +33,6 @@
         iconName: 'breakfast',
         tagText: '早餐'
       },
-      // {
-      //   iconName: 'lunch',
-      //   tagText: '午餐'
-      // },
-      // {
-      //   iconName: 'dinner',
-      //   tagText: '晚餐'
-      // },
       {
         iconName: 'add1',
         tagText: '添加'
@@ -68,10 +61,22 @@
       //   iconName: 'close',
       //   tagText: '服饰'
       // },
+      // {
+      //   iconName: 'lunch',
+      //   tagText: '午餐'
+      // },
+      // {
+      //   iconName: 'dinner',
+      //   tagText: '晚餐'
+      // },
     ];
 
     getIconName(data: string) {
       this.tagsName = data;
+    }
+
+    getNumber(num: string) {
+      this.numberPadNum = num;
     }
   }
 </script>

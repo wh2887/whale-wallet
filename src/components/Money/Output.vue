@@ -2,7 +2,7 @@
     <div class="output-wrapper">
         <IconWithBorder :name=" updateIcon "/>
         <label>
-            <input type="text" maxlength="16">
+            <input type="text" :value="updateOutput">
         </label>
     </div>
 </template>
@@ -18,6 +18,7 @@
   })
   export default class Output extends Vue {
     @Prop() updateIcon = '';
+    @Prop() updateOutput = '';
 
   }
 </script>

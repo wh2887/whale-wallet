@@ -19,7 +19,6 @@
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
-  import index from '@/store';
 
 
   @Component({
