@@ -1,9 +1,9 @@
 <template>
     <div class="output-wrapper">
         <IconWithBorder :name=" updateIcon "/>
-        <label>
-            <input type="text" :value="updateOutput || '0' ">
-        </label>
+        <div>
+            {{updateOutput}}
+        </div>
     </div>
 </template>
 
@@ -17,8 +17,8 @@
     components: {IconWithBorder}
   })
   export default class Output extends Vue {
-    @Prop() updateIcon = '';
-    @Prop() updateOutput = '';
+    @Prop() updateIcon!: string;
+    @Prop() updateOutput!: number;
 
   }
 </script>
@@ -48,19 +48,17 @@
             z-index: 3;
         }
 
-        > :nth-child(2) {
+        :nth-child(2) {
             min-width: 40%;
             position: absolute;
             right: 10px;
-
-            > input {
-                @extend %clearFix;
-                text-align: right;
-                width: 70vw;
-                font-size: 1.5em;
-                line-height: 1.5em;
-                border: none;
-            }
+            @extend %clearFix;
+            text-align: right;
+            width: 70vw;
+            font-size: 1.5em;
+            line-height: 1.5em;
+            border: none;
         }
+
     }
 </style>

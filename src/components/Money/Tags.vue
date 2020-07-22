@@ -34,6 +34,7 @@
       } else {
         this.type = type;
       }
+      this.$emit('update:page', this.type);
     }
   }
 </script>

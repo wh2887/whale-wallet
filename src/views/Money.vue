@@ -1,10 +1,10 @@
 <template>
     <div class="moneyBG">
-        <Type/>
-        <Output :update-icon="tagsName" :update-output="numberPadNum"/>
-        <Tags :tag-data-source="tags" v-on:update:icon="getIconName"/>
-        <Notes/>
-        <NumberPad v-on:update:output=" getNumber "/>
+        <Type :value.sync="record.type"/>
+        <Output :update-icon="record.tagsName" :update-output="record.amount"/>
+        <Tags :tag-data-source="tags" @update:icon="onUpdateIcon" @update:page="onUpdatePage"/>
+        <Notes @update:value="onUpdateNote"/>
+        <NumberPad :value.sync="record.amount"/>
     </div>
 </template>
 
@@ -17,12 +17,27 @@
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
 
+  type Record = {
+    type: string;
+    output: string;
+    tagsPage: string;
+    tagsName: string;
+    note: string;
+    amount: number;
+  }
+
   @Component({
     components: {NumberPad, Notes, Tags, Output, Type}
   })
   export default class Money extends Vue {
-    tagsName = '';
-    numberPadNum = '';
+    record: Record = {
+      type: '-',
+      output: '',
+      tagsPage: '',
+      tagsName: '',
+      note: '',
+      amount: 0,
+    };
     tags: object[] = [
 
       {
@@ -71,12 +86,24 @@
       // },
     ];
 
-    getIconName(data: string) {
-      this.tagsName = data;
+    onUpdateIcon(value: string) {
+      this.record.tagsName = value;
     }
 
-    getNumber(num: string) {
-      this.numberPadNum = num;
+    onUpdateNote(value: string) {
+      this.record.note = value;
+    }
+
+    onUpdateAmount(value: string) {
+      this.record.amount = parseFloat(value);
+    }
+
+    onUpdateType(value: string) {
+      this.record.type = value;
+    }
+
+    onUpdatePage(value: string) {
+      this.record.tagsPage = value;
     }
   }
 </script>
