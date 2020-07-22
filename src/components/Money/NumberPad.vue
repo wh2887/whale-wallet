@@ -20,19 +20,23 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
 
   @Component
   export default class NumberPad extends Vue {
     @Prop() value!: number;
     output = this.value.toString();
 
+    @Watch('output')
+    onOutputChanged() {
+      this.emit();
+    }
+
     emit() {
       this.$emit('update:value', this.output);
     }
 
     inputContent(event: MouseEvent) {
-      this.emit();
       const button = (event.target as HTMLButtonElement);
       const input = button.textContent as string;
       if (this.output.length === 16) {return;}
@@ -40,11 +44,9 @@
         if ('0123456789'.indexOf(input) >= 0) {
           //如果是其中一个就直接替换默认的0位其中的
           this.output = input;
-          this.emit();
         } else {
           //如果输入点'.' 就直接往后加
           this.output += input;
-          this.emit();
         }
         return;
       }
@@ -52,7 +54,6 @@
       if (this.output.indexOf('.') >= 0 && input === '.') {return;}
       //判断 有 + 了，就不能再加.
       this.output += input;
-      this.emit();
     }
 
     //删除功能
@@ -60,21 +61,19 @@
       if (this.output.length === 1) {
         //只有一个了再删除就是0
         this.output = '0';
-        this.emit();
       } else {
         //不然就点一次删除就删除最后一个
         this.output = this.output.slice(0, -1);
-        this.emit();
       }
     }
 
     clear() {
       this.output = '0';
-      this.emit();
     }
 
     ok() {
       this.$emit('submit', this.output);
+      this.output = '0';
     }
   }
 

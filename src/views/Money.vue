@@ -17,6 +17,19 @@
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
 
+  const version = window.localStorage.getItem('version') || '0';
+  const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+  if (version === '0.0.1') {
+    // 数据库升级  迁移数据
+    recordList.forEach(record => {
+      record.createdAt = new Date(2020, 6, 22);
+    });
+    // 保存数据
+    localStorage.setItem('recordList', JSON.stringify(recordList));
+  }
+
+  window.localStorage.setItem('version', '0.0.2');
+
   type Record = {
     type: string;
     output: string;
@@ -24,6 +37,7 @@
     tagsName: string;
     note: string;
     amount: number;
+    createdAt?: Date;
   }
 
   @Component({
@@ -38,7 +52,7 @@
       note: '',
       amount: 0,
     };
-    recordList: Record[] = [];
+    recordList: Record[] = recordList;
     tags: object[] = [
 
       {
@@ -100,7 +114,8 @@
     }
 
     saveRecord() {
-      const record2 = JSON.parse(JSON.stringify(this.record));
+      const record2: Record = JSON.parse(JSON.stringify(this.record));
+      record2.createdAt = new Date();
       this.recordList.push(record2);
     }
 
