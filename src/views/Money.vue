@@ -4,13 +4,13 @@
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
         <Tags :tag-data-source="tags" @update:icon="onUpdateIcon" @update:page="onUpdatePage"/>
         <Notes @update:value="onUpdateNote"/>
-        <NumberPad :value.sync="record.amount"/>
+        <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Watch} from 'vue-property-decorator';
   import Type from '@/components/Money/Type.vue';
   import Output from '@/components/Money/Output.vue';
   import Tags from '@/components/Money/Tags.vue';
@@ -38,6 +38,7 @@
       note: '',
       amount: 0,
     };
+    recordList: Record[] = [];
     tags: object[] = [
 
       {
@@ -94,16 +95,18 @@
       this.record.note = value;
     }
 
-    onUpdateAmount(value: string) {
-      this.record.amount = parseFloat(value);
-    }
-
-    onUpdateType(value: string) {
-      this.record.type = value;
-    }
-
     onUpdatePage(value: string) {
       this.record.tagsPage = value;
+    }
+
+    saveRecord() {
+      const record2 = JSON.parse(JSON.stringify(this.record));
+      this.recordList.push(record2);
+    }
+
+    @Watch('recordList')
+    onRecordListChanged() {
+      localStorage.setItem('recordList', JSON.stringify(this.recordList));
     }
   }
 </script>

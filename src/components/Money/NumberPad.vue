@@ -11,7 +11,7 @@
         <button @click="inputContent">7</button>
         <button @click="inputContent">8</button>
         <button @click="inputContent">9</button>
-        <button class="ok">OK</button>
+        <button @click="ok" class="ok">OK</button>
         <button>+</button>
         <button @click="inputContent">0</button>
         <button @click="inputContent">.</button>
@@ -71,6 +71,10 @@
     clear() {
       this.output = '0';
       this.emit();
+    }
+
+    ok() {
+      this.$emit('submit', this.output);
     }
   }
 
