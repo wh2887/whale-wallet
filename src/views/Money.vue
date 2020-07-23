@@ -18,7 +18,7 @@
   import NumberPad from '@/components/Money/NumberPad.vue';
 
   /* eslint-disable */
-  const {model} = require('../model.js');
+  const {model} = require('@/model.js');
   const version = window.localStorage.getItem('version') || '0';
   const recordList: Record[] = model.fetch();
   if (version === '0.0.1') {
