@@ -17,8 +17,10 @@
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
 
+  /* eslint-disable */
+  const {model} = require('../model.js');
   const version = window.localStorage.getItem('version') || '0';
-  const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+  const recordList: Record[] = model.fetch();
   if (version === '0.0.1') {
     // 数据库升级  迁移数据
     recordList.forEach(record => {
@@ -121,7 +123,7 @@
 
     @Watch('recordList')
     onRecordListChanged() {
-      localStorage.setItem('recordList', JSON.stringify(this.recordList));
+      window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
     }
   }
 </script>
