@@ -1,24 +1,21 @@
 <template>
-        <div>
-            <div class="header">
-                <button class="left">
-                    <Icon name="left"/>
-                    <span>返回</span>
-                </button>
-<!--                这边只能是span 和 button-->
-                <slot />
-            </div>
+    <div>
+        <div class="header">
+            <button class="left" @click="$router.go(-1)">
+                <Icon name="left"/>
+                <span>返回</span>
+            </button>
+            <!--                这边只能是span 和 button-->
+            <slot/>
         </div>
+    </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import IconWithBorder from '@/components/IconWithBorder.vue';
 
-  @Component({
-    components: {IconWithBorder}
-  })
+  @Component
   export default class Header extends Vue {
 
   }

@@ -10,14 +10,18 @@
                 <IconWithBorder name="dog3"/>
                 <span>宠物</span>
             </div>
-            <Icon name="right"/>
+            <button @click="yyy">
+                <Icon name="right"/>
+            </button>
         </div>
         <div class="icon-list">
             <div class="left">
                 <IconWithBorder name="dog3"/>
                 <span>宠物</span>
             </div>
-            <Icon name="right"/>
+            <button @click="yyy">
+                <Icon name="right"/>
+            </button>
         </div>
     </Layout>
 </template>
@@ -48,6 +52,10 @@
         justify-content: space-between;
         padding: 6px 16px;
         @extend %bottomShadow;
+        > button{
+            border: none;
+            background: inherit;
+        }
 
         > .left {
             display: flex;
