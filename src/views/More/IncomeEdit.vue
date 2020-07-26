@@ -1,6 +1,7 @@
 <template>
     <Layout>
-        报表
+        编辑收入分类
+        <button>yyy</button>
     </Layout>
 </template>
 
@@ -9,7 +10,8 @@
   import {Component} from 'vue-property-decorator';
 
   @Component
-  export default class Statistics extends Vue {
+  export default class IncomeEdit extends Vue {
+
   }
 </script>
 

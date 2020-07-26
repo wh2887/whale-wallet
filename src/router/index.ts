@@ -5,7 +5,8 @@ import More from '@/views/More.vue';
 import NotFound from '@/views/NotFound.vue';
 import Details from '@/views/Details.vue';
 import Money from '@/views/Money.vue';
-import Pages from '@/components/Pages.vue';
+import PayEdit from '@/views/More/PayEdit.vue';
+import IncomeEdit from '@/views/More/IncomeEdit.vue';
 
 Vue.use(VueRouter);
 
@@ -31,9 +32,17 @@ const routes: Array<RouteConfig> = [
     component: More
   },
   {
+    path: '/more/payedit',
+    component: PayEdit
+  },
+  {
+    path: '/more/incomeedit',
+    component: IncomeEdit
+  },
+  {
     path: '*',
     component: NotFound
-  }
+  },
 ];
 
 const router = new VueRouter({

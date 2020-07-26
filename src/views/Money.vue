@@ -2,7 +2,7 @@
     <div class="moneyBG">
         <Type :value.sync="record.type"/>
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
-        <Tags :tag-data-source="tags" @update:icon="onUpdateIcon" @update:page="onUpdatePage"/>
+        <Tags :tag-data-source="tags" :tags-page="tagsPage" :record-type="record.type" @update:icon="onUpdateIcon"/>
         <Notes @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
@@ -16,17 +16,19 @@
   import Tags from '@/components/Money/Tags.vue';
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
-  import model from '@/model';
+  import recordListModel from '@/models/recordListModel';
+  import tagListModel from '@/models/tagListModel';
 
   const version = window.localStorage.getItem('version') || '0';
-  const recordList = model.fetch();
+  const recordList = recordListModel.fetch();
+  const tagList = tagListModel.fetch();
   if (version === '0.0.1') {
     // 数据库升级  迁移数据
     recordList.forEach(record => {
       record.createdAt = new Date(2020, 6, 22);
     });
     // 保存数据
-    model.save(recordList);
+    recordListModel.save(recordList);
   }
 
   window.localStorage.setItem('version', '0.0.2');
@@ -39,7 +41,6 @@
     record: RecordItem = {
       type: '-',
       output: '',
-      tagsPage: '',
       tagsName: '',
       note: '',
       amount: 0,
@@ -54,10 +55,6 @@
       {
         iconName: 'breakfast',
         tagText: '早餐'
-      },
-      {
-        iconName: 'add1',
-        tagText: '添加'
       },
       {
         iconName: 'bedroom',
@@ -79,19 +76,63 @@
         iconName: 'travel',
         tagText: '旅行'
       },
-      // {
-      //   iconName: 'close',
-      //   tagText: '服饰'
-      // },
-      // {
-      //   iconName: 'lunch',
-      //   tagText: '午餐'
-      // },
-      // {
-      //   iconName: 'dinner',
-      //   tagText: '晚餐'
-      // },
+      {
+        iconName: 'close',
+        tagText: '服饰'
+      },
+      {
+        iconName: 'lunch',
+        tagText: '午餐'
+      },
+      {
+        iconName: 'sancan',
+        tagText: '三餐'
+      },
+      {
+        iconName: 'amusement',
+        tagText: '娱乐'
+      },
+      {
+        iconName: 'chufang',
+        tagText: '厨房'
+      },
+      {
+        iconName: 'houseRent',
+        tagText: '房租'
+      },
+      {
+        iconName: 'girlfriend',
+        tagText: '女友'
+      },
+      {
+        iconName: 'game',
+        tagText: '游戏'
+      },
+      {
+        iconName: 'taoBao',
+        tagText: '淘宝'
+      },
+      {
+        iconName: 'jingDong',
+        tagText: '京东'
+      },
+      {
+        iconName: 'sock',
+        tagText: '零食'
+      },
+      {
+        iconName: 'phoneBill',
+        tagText: '话费'
+      },
     ];
+    tagsPage: object = {page: 0, residue: 0};
+
+    mounted() {
+      const page = Math.floor(this.tags.length / 7);
+      const residue = this.tags.length - 7 * page;
+      this.tagsPage = {page: page, residue: residue};
+      return this.tagsPage;
+    }
 
     onUpdateIcon(value: string) {
       this.record.tagsName = value;
@@ -101,19 +142,16 @@
       this.record.note = value;
     }
 
-    onUpdatePage(value: string) {
-      this.record.tagsPage = value;
-    }
 
     saveRecord() {
-      const record2: RecordItem = model.clone(this.record);
+      const record2: RecordItem = recordListModel.clone(this.record);
       record2.createdAt = new Date();
       this.recordList.push(record2);
     }
 
     @Watch('recordList')
     onRecordListChanged() {
-      model.save(this.recordList);
+      recordListModel.save(this.recordList);
     }
   }
 </script>
