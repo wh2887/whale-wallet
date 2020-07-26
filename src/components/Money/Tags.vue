@@ -1,7 +1,7 @@
 <template>
     <div>
         <ol class="tags-list">
-            <li v-for="(tag) in tagDataSource.slice(startIndex,endIndex)" :key="tag.iconName"
+            <li v-for="(tag) in tags" :key="tag.iconName"
                 @click="$emit('update:icon',tag.iconName)">
                 <IconWithBorder :name=" tag.iconName "/>
                 <span>{{tag.tagText}}</span>
@@ -28,7 +28,6 @@
   import tagListModel from '@/models/tagListModel';
 
 
-
   @Component({
     components: {IconWithBorder}
   })
@@ -44,9 +43,9 @@
 
     addTags() {
       if (this.recordType === '-') {
-        this.$router.push({path: '/more/payedit'});
+        this.$router.push({path: '/more/payedit', query: {type: '-'}});
       } else if (this.recordType === '+') {
-        this.$router.push({path: '/more/incomeedit'});
+        this.$router.push({path: '/more/incomeedit', query: {type: '+'}});
       }
     }
 

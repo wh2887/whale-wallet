@@ -7,6 +7,7 @@ import Details from '@/views/Details.vue';
 import Money from '@/views/Money.vue';
 import PayEdit from '@/views/More/PayEdit.vue';
 import IncomeEdit from '@/views/More/IncomeEdit.vue';
+import PayAdd from '@/views/More/PayAdd.vue';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,10 @@ const routes: Array<RouteConfig> = [
   {
     path: '/more/payedit',
     component: PayEdit
+  },
+  {
+    path: '/more/payadd',
+    component: PayAdd
   },
   {
     path: '/more/incomeedit',
