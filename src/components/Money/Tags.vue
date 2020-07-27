@@ -41,6 +41,9 @@
     endIndex = 7;
 
 
+    mounted(){
+      console.log(this.tags[0] === this.tags[2]);
+    }
     addTags() {
       if (this.recordType === '-') {
         this.$router.push({path: '/more/payedit', query: {type: '-'}});

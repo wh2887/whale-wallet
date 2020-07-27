@@ -6,3 +6,8 @@ type RecordItem = {
   amount: number;
   createdAt?: Date;
 }
+type Tag = {
+  id: string;
+  iconName: string;
+  tagText: string;
+}

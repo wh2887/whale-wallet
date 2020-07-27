@@ -2,24 +2,16 @@
     <Layout>
         <Header>
             <span>编辑支出分类</span>
-            <button class="add" @click="yyy">添加</button>
+            <button class="add" @click="jumpToAdd('-',)">添加</button>
         </Header>
 
-        <div class="icon-list">
+        <div class="icon-list" v-for="tag in tagsList" :key="tag.id"
+             @click="jumpWithTag(tag.iconName,tag.tagText)">
             <div class="left">
-                <IconWithBorder name="dog3"/>
-                <span>宠物</span>
+                <IconWithBorder :name="tag.iconName"/>
+                <span>{{tag.tagText}}</span>
             </div>
-            <button @click="yyy">
-                <Icon name="right"/>
-            </button>
-        </div>
-        <div class="icon-list">
-            <div class="left">
-                <IconWithBorder name="dog3"/>
-                <span>宠物</span>
-            </div>
-            <button @click="yyy">
+            <button>
                 <Icon name="right"/>
             </button>
         </div>
@@ -31,13 +23,21 @@
   import {Component} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
   import Header from '@/components/Header.vue';
+  import tagListModel from '@/models/tagListModel';
 
+  tagListModel.fetch();
   @Component({
     components: {Header, IconWithBorder}
   })
   export default class PayEdit extends Vue {
-    yyy() {
-      this.$router.push({path: '/more/payadd', query: {type: '-'}});
+    tagsList = tagListModel.data;
+
+    jumpToAdd(type: string) {
+      this.$router.push({path: '/more/payadd', query: {type: type}});
+    }
+
+    jumpWithTag(iconName: string, tagText: string) {
+      this.$router.push({path: '/more/payadd', query: {iconName: iconName, tagText: tagText}});
     }
   }
 </script>
@@ -52,7 +52,8 @@
         justify-content: space-between;
         padding: 6px 16px;
         @extend %bottomShadow;
-        > button{
+
+        > button {
             border: none;
             background: inherit;
         }
