@@ -1,11 +1,8 @@
 <template>
     <Layout>
-        <Header>
-            <span>编辑支出分类</span>
-            <button class="add" @click="jumpToAdd('-',)">添加</button>
-        </Header>
+        <Header header-title="编辑支出分类" button-content="添加" @click="jumpToAdd('-',)"/>
         <router-link class="icon-list" v-for="tag in tags" :key="tag.id"
-             :to="`/more/payedit/${tag.id}`" >
+                     :to="`/more/payedit/${tag.id}`">
             <div class="left">
                 <IconWithBorder :name="tag.iconName"/>
                 <span>{{tag.tagText}}</span>

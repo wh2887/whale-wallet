@@ -1,22 +1,22 @@
 <template>
-    <div>
-        <div class="header">
-            <button class="left" @click="$router.go(-1)">
-                <Icon name="left"/>
-                <span>返回</span>
-            </button>
-            <!--                这边只能是span 和 button-->
-            <slot/>
-        </div>
+    <div class="header">
+        <button class="left" @click="$router.go(-1)">
+            <Icon name="left"/>
+            <span>返回</span>
+        </button>
+        <span>{{headerTitle}}</span>
+        <button class="add" @click="$emit('click',$event)">{{buttonContent}}</button>
     </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Prop} from 'vue-property-decorator';
 
   @Component
   export default class Header extends Vue {
+    @Prop({required: true}) headerTitle!: string;
+    @Prop({required: true}) buttonContent!: string;
 
   }
 </script>
