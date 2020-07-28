@@ -4,7 +4,7 @@ type TagListModel = {
   data: Tag[];
   fetch: () => Tag[];
   create: (tagsType: Tag) => boolean;
-  update: (id: string, iconName: string, tagText: string) => 'success' | 'not found' | 'duplicated';
+  update: (id: string, iconName: string, tagText: string) => boolean;
   save: () => void;
 }
 const tagListModel: TagListModel = {
@@ -29,18 +29,23 @@ const tagListModel: TagListModel = {
     const idList = this.data.map(item => item.id);
     if (idList.indexOf(id) >= 0) {
       const iconNames = this.data.map(item => item.iconName);
-      if (iconNames.indexOf(iconName) >= 0) {
-        return 'duplicated';
+      const iconTotal = iconNames.reduce((a, v) => v === iconName ? a + 1 : a, 0);
+      const tagTexts = this.data.map(item => item.tagText);
+      const textTotal = tagTexts.reduce((a, v) => v === tagText ? a + 1 : a, 0);
+      if (iconTotal >= 2) {
+        throw new Error('icon duplicated');
+      } else if (textTotal >= 2) {
+        throw new Error('text duplicated');
       } else {
         const tag = this.data.filter(item => item.id === id)[0];
         tag.iconName = iconName;
         tag.tagText = tagText;
         this.save();
-        return 'success';
       }
     } else {
-      return 'not found';
+      return false;
     }
+    return true;
   },
   save() {
     window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));

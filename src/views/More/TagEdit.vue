@@ -8,7 +8,7 @@
             <div class="input">
                 <IconWithBorder :name="selectedIcon"/>
                 <label>
-                    <input type="text" placeholder="自定义输入名字，限 2 个字" v-model="tag.tagText">
+                    <input type="text" maxlength="3" placeholder="自定义输入名字，限 2 个字" v-model="tag.tagText">
                 </label>
             </div>
             <div class="list-wrapper">
@@ -30,7 +30,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Watch} from 'vue-property-decorator';
   import Header from '@/components/Header.vue';
   import IconWithBorder from '@/components/IconWithBorder.vue';
   import tagListModel from '@/models/tagListModel';
@@ -44,6 +44,7 @@
     tag?: Tag;
     iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
     selectedIcon = '';
+
 
     created() {
       const id = this.$route.params.id;
@@ -64,9 +65,17 @@
 
     updateTag() {
       if (this.tag) {
-        tagListModel.update(this.tag.id, this.selectedIcon, this.tag.tagText);
+        try {
+          tagListModel.update(this.tag.id, this.selectedIcon, this.tag.tagText);
+          this.$router.go(-1);
+        } catch (error) {
+          if (error.message === 'icon duplicated') {
+            window.alert('标签图标重复！请重新输入标签名！');
+          } else if (error.message === 'text duplicated') {
+            window.alert('标签名重复！请重新输入标签名！');
+          }
+        }
       }
-      this.$router.go(-1);
     }
 
   }
