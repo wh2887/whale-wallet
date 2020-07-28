@@ -2,13 +2,13 @@
     <Layout>
         <div class="payadd-wrapper">
             <Header>
-                <span>添加支出分类</span>
-                <button class="add" @click="createTag">确定</button>
+                <span>修改支出分类</span>
+                <button class="add" @click="updateTag">确定</button>
             </Header>
             <div class="input">
                 <IconWithBorder :name="selectedIcon"/>
                 <label>
-                    <input type="text" placeholder="自定义输入名字，限 2 个字" v-model="tagText">
+                    <input type="text" placeholder="自定义输入名字，限 2 个字" v-model="tag.tagText">
                 </label>
             </div>
             <div class="list-wrapper">
@@ -40,42 +40,35 @@
   @Component({
     components: {Header, IconWithBorder}
   })
-  export default class PayAdd extends Vue {
+  export default class TagEdit extends Vue {
+    tag?: Tag;
     iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
     selectedIcon = '';
-    tagText = '';
 
-    mounted() {
-      const x = this.$route.query.tagText as string;
-      const y = this.$route.query.iconName as string;
-      if (x && y) {
-        this.tagText = x;
-        this.selectedIcon = y;
+    created() {
+      const id = this.$route.params.id;
+      tagListModel.fetch();
+      const tags = tagListModel.data;
+      const tag = tags.filter(item => item.id === id)[0];
+      if (tag) {
+        this.tag = tag;
+        this.selectedIcon = this.tag.iconName;
       } else {
-        this.tagText = '';
-        this.selectedIcon = '';
+        this.$router.replace('/404');
       }
     }
 
-    select(value: string) {
-      this.selectedIcon = value;
+    select(name: string) {
+      this.selectedIcon = name;
     }
 
-    createTag(obj: Tag) {
-      obj = {id: this.selectedIcon, iconName: this.selectedIcon, tagText: this.tagText};
-      if (obj) {
-        try {
-          tagListModel.create(obj);
-          this.$router.go(-1);
-        } catch (error) {
-          if (error.message === 'icon duplicated') {
-            window.alert('标签图标重复，请重新选择图标！');
-          } else if (error.message === 'text duplicated') {
-            window.alert('标签名称重复，请重新输入名称！');
-          }
-        }
+    updateTag() {
+      if (this.tag) {
+        tagListModel.update(this.tag.id, this.selectedIcon, this.tag.tagText);
       }
+      this.$router.go(-1);
     }
+
   }
 </script>
 

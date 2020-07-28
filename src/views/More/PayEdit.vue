@@ -4,9 +4,8 @@
             <span>编辑支出分类</span>
             <button class="add" @click="jumpToAdd('-',)">添加</button>
         </Header>
-
-        <div class="icon-list" v-for="tag in tagsList" :key="tag.id"
-             @click="jumpWithTag(tag.iconName,tag.tagText)">
+        <router-link class="icon-list" v-for="tag in tags" :key="tag.id"
+             :to="`/more/payedit/${tag.id}`" >
             <div class="left">
                 <IconWithBorder :name="tag.iconName"/>
                 <span>{{tag.tagText}}</span>
@@ -14,7 +13,7 @@
             <button>
                 <Icon name="right"/>
             </button>
-        </div>
+        </router-link>
     </Layout>
 </template>
 
@@ -30,15 +29,15 @@
     components: {Header, IconWithBorder}
   })
   export default class PayEdit extends Vue {
-    tagsList = tagListModel.data;
+    tags = tagListModel.data;
 
     jumpToAdd(type: string) {
       this.$router.push({path: '/more/payadd', query: {type: type}});
     }
 
-    jumpWithTag(iconName: string, tagText: string) {
-      this.$router.push({path: '/more/payadd', query: {iconName: iconName, tagText: tagText}});
-    }
+    // jumpToEdit(iconName: string, tagText: string) {
+    //   this.$router.push({path: '/more/payedit', query: {iconName: iconName, tagText: tagText}});
+    // }
   }
 </script>
 
