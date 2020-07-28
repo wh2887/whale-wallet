@@ -2,40 +2,22 @@
     <Layout>
         <div class="payadd-wrapper">
             <Header header-title="修改支出分类" button-content="确定" @click="updateTag"/>
-            <div class="input">
-                <IconWithBorder :name="selectedIcon"/>
-                <label>
-                    <input type="text" maxlength="3" placeholder="自定义输入名字，限 2 个字" v-model="tag.tagText">
-                </label>
-            </div>
-            <div class="list-wrapper">
-                <div class="icon-list">
-                    <IconWithBorder :name="name" v-for="(name,index) in iconName" :key="index"
-                                    @click.native="select(name)"/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                </div>
-            </div>
-
+            <TagForm :selected-icon.sync="selectedIcon" :icon-name="iconName" :tag="tag"/>
         </div>
     </Layout>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Watch} from 'vue-property-decorator';
+  import {Component} from 'vue-property-decorator';
   import Header from '@/components/Header.vue';
-  import IconWithBorder from '@/components/IconWithBorder.vue';
   import tagListModel from '@/models/tagListModel';
+  import TagForm from '@/components/TagForm.vue';
 
   tagListModel.fetch();
 
   @Component({
-    components: {Header, IconWithBorder}
+    components: {TagForm, Header}
   })
   export default class TagEdit extends Vue {
     tag?: Tag;
@@ -54,10 +36,6 @@
       } else {
         this.$router.replace('/404');
       }
-    }
-
-    select(name: string) {
-      this.selectedIcon = name;
     }
 
     updateTag() {
@@ -79,55 +57,12 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "~@/assets/styles/reset.scss";
-    @import "~@/assets/styles/helper.scss";
 
     .payadd-wrapper {
         display: flex;
         flex-direction: column;
         height: 100%;
         overflow: hidden;
-
-        > .input {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 4px 16px;
-            @extend %bottomShadow;
-
-            > label {
-                > input {
-                    border: none;
-                    background: inherit;
-                    font-size: 1.5em;
-
-                    &::placeholder {
-                        font-size: 0.7em;
-                        color: $color-nearblack;
-                    }
-                }
-            }
-        }
-
-        .list-wrapper {
-            flex-grow: 1;
-            overflow: auto;
-
-            > .icon-list {
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                margin: 20px 11px;
-
-                > * {
-                    margin: 10px;
-                }
-
-                > :nth-last-child(1), :nth-last-child(2), :nth-last-child(3), :nth-last-child(4), :nth-last-child(5), :nth-last-child(6), {
-                    border: none;
-                }
-            }
-        }
     }
 
 </style>
