@@ -1,10 +1,7 @@
 <template>
     <Layout>
         <div class="payadd-wrapper">
-            <Header>
-                <span>添加支出分类</span>
-                <button class="add" @click="createTag">确定</button>
-            </Header>
+            <Header header-title="添加支出分类" button-content="确定" @click="createTag"/>
             <div class="input">
                 <IconWithBorder :name="selectedIcon"/>
                 <label>
