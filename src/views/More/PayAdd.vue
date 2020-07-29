@@ -2,8 +2,12 @@
     <Layout>
         <div class="payadd-wrapper">
             <Header header-title="添加支出分类" button-content="确定" @click="createTag"/>
-            <TagForm :selected-icon.sync="selectedIcon" :icon-name="iconName"
-                     @update:input="onUpdateInput"/>
+            <TagForm :delete-toggle="false"
+                     :selected-icon.sync="selectedIcon"
+                     :icon-name="iconName"
+                     @update:input="onUpdateInput"
+
+            />
         </div>
     </Layout>
 </template>

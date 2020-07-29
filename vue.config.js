@@ -1,4 +1,8 @@
 module.exports = {
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/whale-wallet-website/'
+    : '/',
+
   lintOnSave: false,
   devServer: {
     disableHostCheck: false,

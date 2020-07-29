@@ -5,6 +5,7 @@ type TagListModel = {
   fetch: () => Tag[];
   create: (tagsType: Tag) => boolean;
   update: (id: string, iconName: string, tagText: string) => boolean;
+  remove: (id: string) => boolean;
   save: () => void;
 }
 const tagListModel: TagListModel = {
@@ -39,6 +40,7 @@ const tagListModel: TagListModel = {
       } else {
         const tag = this.data.filter(item => item.id === id)[0];
         tag.iconName = iconName;
+        tag.id = iconName;
         tag.tagText = tagText;
         this.save();
       }
@@ -47,6 +49,20 @@ const tagListModel: TagListModel = {
     }
     return true;
   },
+
+  remove(id: string) {
+    let index = -1;
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i].id === id) {
+        index = i;
+        break;
+      }
+    }
+    this.data.splice(index, 1);
+    this.save();
+    return true;
+  },
+
   save() {
     window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
   }

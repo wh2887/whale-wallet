@@ -2,7 +2,12 @@
     <Layout>
         <div class="payadd-wrapper">
             <Header header-title="修改支出分类" button-content="确定" @click="updateTag"/>
-            <TagForm :selected-icon.sync="selectedIcon" :icon-name="iconName" :tag="tag" @update:input="onUpdateInput"/>
+            <TagForm :delete-toggle="true"
+                     :selected-icon.sync="selectedIcon"
+                     :icon-name="iconName"
+                     :tag="tag"
+                     @update:input="onUpdateInput"
+            />
         </div>
     </Layout>
 </template>
@@ -58,6 +63,7 @@
         }
       }
     }
+
 
   }
 </script>

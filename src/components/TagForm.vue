@@ -3,8 +3,11 @@
         <div class="input">
             <IconWithBorder :name="selectedIcon"/>
             <label>
-                <input type="text" placeholder="自定义输入名字，限 2 个字" :value="value"
+                <input type="text" maxlength="10" placeholder="自定义输入名字，限 2 个字" :value="value"
                        @input="value = $event.target.value">
+                <button class="delete" v-if="deleteToggle" @click="removeTag">
+                    <Icon name="delete"/>
+                </button>
             </label>
         </div>
         <div class="list-wrapper">
@@ -27,6 +30,7 @@
   import Vue from 'vue';
   import {Component, Prop, Watch} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
+  import tagListModel from '@/models/tagListModel';
 
   @Component({
     components: {IconWithBorder}
@@ -34,6 +38,7 @@
   export default class TagForm extends Vue {
     @Prop({required: true}) iconName!: string[];
     @Prop({required: true}) selectedIcon!: string;
+    @Prop({required: true}) deleteToggle!: boolean;
     @Prop() tag!: Tag;
     value = '';
 
@@ -51,6 +56,16 @@
     select(name: string) {
       this.$emit('update:selectedIcon', name);
     }
+
+    removeTag() {
+      if (this.tag) {
+        if (tagListModel.remove(this.tag.id)) {
+          this.$router.go(-1);
+        } else {
+          window.alert('删除失败！');
+        }
+      }
+    }
   }
 </script>
 
@@ -62,10 +77,14 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 4px 16px;
+        padding: 4px 5px;
         @extend %bottomShadow;
 
         > label {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
             > input {
                 border: none;
                 background: inherit;
@@ -75,6 +94,12 @@
                     font-size: 0.7em;
                     color: $color-nearblack;
                 }
+            }
+
+            > .delete {
+                border: none;
+                background: inherit;
+                font-size: 1.5em;
             }
         }
     }
