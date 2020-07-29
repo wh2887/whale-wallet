@@ -1,3 +1,5 @@
+import createdId from '@/lib/createdId';
+
 const localStorageKeyName = 'tagList';
 
 type TagListModel = {
@@ -22,6 +24,7 @@ const tagListModel: TagListModel = {
     } else if (tagTexts.indexOf(tagsType.tagText) >= 0) {
       throw new Error('text duplicated');
     }
+    tagsType.id = createdId().toString();  // ID生成器得到的ID 为 'number'
     this.data.push(tagsType);
     this.save();
     return true;
@@ -40,7 +43,7 @@ const tagListModel: TagListModel = {
       } else {
         const tag = this.data.filter(item => item.id === id)[0];
         tag.iconName = iconName;
-        tag.id = iconName;
+        tag.id = id;
         tag.tagText = tagText;
         this.save();
       }

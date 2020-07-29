@@ -57,8 +57,12 @@
       this.tagText = value;
     }
 
-    createTag(obj: Tag) {
-      obj = {id: this.selectedIcon, iconName: this.selectedIcon, tagText: this.tagText};
+    createTag(id: string, iconName: string, tagText: string) {
+      id = this.selectedIcon;
+      iconName = this.selectedIcon;
+      tagText = this.tagText;
+      const obj = {id, iconName, tagText};
+      // const obj = {id: id, iconName: iconName, tagText: tagText};
       if (obj) {
         try {
           tagListModel.create(obj);
