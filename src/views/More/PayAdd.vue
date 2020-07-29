@@ -2,25 +2,8 @@
     <Layout>
         <div class="payadd-wrapper">
             <Header header-title="添加支出分类" button-content="确定" @click="createTag"/>
-            <div class="input">
-                <IconWithBorder :name="selectedIcon"/>
-                <label>
-                    <input type="text" placeholder="自定义输入名字，限 2 个字" v-model="tagText">
-                </label>
-            </div>
-            <div class="list-wrapper">
-                <div class="icon-list">
-                    <IconWithBorder :name="name" v-for="(name,index) in iconName" :key="index"
-                                    @click.native="select(name)"/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                    <IconWithBorder/>
-                </div>
-            </div>
-
+            <TagForm :selected-icon.sync="selectedIcon" :icon-name="iconName"
+                     @update:input="onUpdateInput"/>
         </div>
     </Layout>
 </template>
@@ -30,32 +13,44 @@
   import {Component} from 'vue-property-decorator';
   import Header from '@/components/Header.vue';
   import IconWithBorder from '@/components/IconWithBorder.vue';
+  import TagForm from '@/components/TagForm.vue';
   import tagListModel from '@/models/tagListModel';
 
   tagListModel.fetch();
 
   @Component({
-    components: {Header, IconWithBorder}
+    components: {Header, IconWithBorder, TagForm}
   })
   export default class PayAdd extends Vue {
-    iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
+    // iconName 支出分类的图标库
+    iconName: string[] = [
+      'phoneBill',
+      'sock',
+      'jingDong',
+      'game',
+      'taoBao',
+      'houseRent',
+      'bedroom',
+      'grocery-shopping',
+      'utility-bill',
+      'shuiguo',
+      'dog3',
+      'breakfast',
+      'lunch',
+      'sancan',
+      'traffic',
+      'amusement',
+      'chufang',
+      'travel',
+      'close',
+      'girlfriend'
+    ];
     selectedIcon = '';
     tagText = '';
 
-    mounted() {
-      const x = this.$route.query.tagText as string;
-      const y = this.$route.query.iconName as string;
-      if (x && y) {
-        this.tagText = x;
-        this.selectedIcon = y;
-      } else {
-        this.tagText = '';
-        this.selectedIcon = '';
-      }
-    }
 
-    select(value: string) {
-      this.selectedIcon = value;
+    onUpdateInput(value: string) {
+      this.tagText = value;
     }
 
     createTag(obj: Tag) {
@@ -86,46 +81,7 @@
         height: 100%;
         overflow: hidden;
 
-        > .input {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 4px 16px;
-            @extend %bottomShadow;
 
-            > label {
-                > input {
-                    border: none;
-                    background: inherit;
-                    font-size: 1.5em;
-
-                    &::placeholder {
-                        font-size: 0.7em;
-                        color: $color-nearblack;
-                    }
-                }
-            }
-        }
-
-        .list-wrapper {
-            flex-grow: 1;
-            overflow: auto;
-
-            > .icon-list {
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                margin: 20px 11px;
-
-                > * {
-                    margin: 10px;
-                }
-
-                > :nth-last-child(1), :nth-last-child(2), :nth-last-child(3), :nth-last-child(4), :nth-last-child(5), :nth-last-child(6), {
-                    border: none;
-                }
-            }
-        }
     }
 
 </style>

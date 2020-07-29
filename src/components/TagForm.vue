@@ -3,7 +3,8 @@
         <div class="input">
             <IconWithBorder :name="selectedIcon"/>
             <label>
-                <input type="text" placeholder="自定义输入名字，限 2 个字" v-model="tag.tagText">
+                <input type="text" placeholder="自定义输入名字，限 2 个字" :value="value"
+                       @input="value = $event.target.value">
             </label>
         </div>
         <div class="list-wrapper">
@@ -24,7 +25,7 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
 
   @Component({
@@ -33,12 +34,23 @@
   export default class TagForm extends Vue {
     @Prop({required: true}) iconName!: string[];
     @Prop({required: true}) selectedIcon!: string;
-    @Prop({required: true}) tag!: Tag;
+    @Prop() tag!: Tag;
+    value = '';
 
-    select(name: string) {
-      this.$emit('update:selectedIcon',name)
+    created() {
+      if (this.tag != undefined) {
+        this.value = this.tag.tagText;
+      }
     }
 
+    @Watch('value')
+    OnValueChanged() {
+      this.$emit('update:input', this.value);
+    }
+
+    select(name: string) {
+      this.$emit('update:selectedIcon', name);
+    }
   }
 </script>
 

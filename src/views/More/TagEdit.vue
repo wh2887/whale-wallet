@@ -2,7 +2,7 @@
     <Layout>
         <div class="payadd-wrapper">
             <Header header-title="修改支出分类" button-content="确定" @click="updateTag"/>
-            <TagForm :selected-icon.sync="selectedIcon" :icon-name="iconName" :tag="tag"/>
+            <TagForm :selected-icon.sync="selectedIcon" :icon-name="iconName" :tag="tag" @update:input="onUpdateInput"/>
         </div>
     </Layout>
 </template>
@@ -35,6 +35,12 @@
         this.selectedIcon = this.tag.iconName;
       } else {
         this.$router.replace('/404');
+      }
+    }
+
+    onUpdateInput(value: string) {
+      if (this.tag) {
+        this.tag.tagText = value;
       }
     }
 
