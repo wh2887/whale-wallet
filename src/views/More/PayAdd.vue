@@ -20,7 +20,6 @@
   import TagForm from '@/components/TagForm.vue';
   import tagListModel from '@/models/tagListModel';
 
-  tagListModel.fetch();
 
   @Component({
     components: {Header, IconWithBorder, TagForm}
@@ -57,23 +56,14 @@
       this.tagText = value;
     }
 
-    createTag(id: string, iconName: string, tagText: string) {
-      id = this.selectedIcon;
-      iconName = this.selectedIcon;
-      tagText = this.tagText;
+    createTag() {
+      const id = this.selectedIcon;
+      const iconName = this.selectedIcon;
+      const tagText = this.tagText;
       const obj = {id, iconName, tagText};
-      // const obj = {id: id, iconName: iconName, tagText: tagText};
       if (obj) {
-        try {
-          tagListModel.create(obj);
-          this.$router.go(-1);
-        } catch (error) {
-          if (error.message === 'icon duplicated') {
-            window.alert('标签图标重复，请重新选择图标！');
-          } else if (error.message === 'text duplicated') {
-            window.alert('标签名称重复，请重新输入名称！');
-          }
-        }
+        window.createTag(obj);
+        this.$router.go(-1);
       }
     }
   }
