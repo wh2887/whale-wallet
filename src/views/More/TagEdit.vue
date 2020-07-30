@@ -19,12 +19,12 @@
   import tagListModel from '@/models/tagListModel';
   import TagForm from '@/components/TagForm.vue';
 
-  tagListModel.fetch();
 
   @Component({
     components: {TagForm, Header}
   })
   export default class TagEdit extends Vue {
+    tags = window.tagList;
     tag?: Tag;
     iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
     selectedIcon = '';
@@ -32,9 +32,8 @@
 
     created() {
       const id = this.$route.params.id;
-      tagListModel.fetch();
-      const tags = tagListModel.data;
-      const tag = tags.filter(item => item.id === id)[0];
+      // tagListModel.fetch();
+      const tag = this.tags.filter(item => item.id === id)[0];
       if (tag) {
         this.tag = tag;
         this.selectedIcon = this.tag.iconName;

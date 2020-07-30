@@ -4,7 +4,7 @@
             <li v-for="(tag) in tags" :key="tag.iconName"
                 @click="$emit('update:icon',tag.iconName)">
                 <IconWithBorder :name=" tag.iconName "/>
-                <span>{{tag.tagText}}</span>
+                <span>{{tag.tagText.slice(0,2)}}</span>
             </li>
 
             <li @click="addTags">
@@ -48,24 +48,25 @@
       }
     }
 
-    getPage(type: string) {
-      if (type !== '1' && type !== '2' && type !== '3') {
-        throw new Error('type is unknown');
-      } else if (type === '1') {
-        this.type = type;
-        this.startIndex = 0;
-        this.endIndex = 7;
-      } else if (type === '2') {
-        this.type = type;
-        this.startIndex = 7;
-        this.endIndex = 14;
-      } else if (type === '3') {
-        this.type = type;
-        this.startIndex = 14;
-        this.endIndex = 20;
-      }
-      this.$emit('update:page', this.type);
-    }
+    // getPage(type: string) {
+    //   if (type !== '1' && type !== '2' && type !== '3') {
+    //     throw new Error('type is unknown');
+    //   } else if (type === '1') {
+    //     this.type = type;
+    //     this.startIndex = 0;
+    //     this.endIndex = 7;
+    //   } else if (type === '2') {
+    //     this.type = type;
+    //     this.startIndex = 7;
+    //     this.endIndex = 14;
+    //   } else if (type === '3') {
+    //     this.type = type;
+    //     this.startIndex = 14;
+    //     this.endIndex = 20;
+    //   }
+    //   this.$emit('update:page', this.type);
+    // }
+    //
   }
 </script>
 

@@ -18,11 +18,11 @@
   import NumberPad from '@/components/Money/NumberPad.vue';
   import recordListModel from '@/models/recordListModel';
   import tagListModel from '@/models/tagListModel';
-  import clone from '@/lib/clone';
+
+  const recordList = recordListModel.fetch();
+
 
   const version = window.localStorage.getItem('version') || '0';
-  const recordList = recordListModel.fetch();
-  const tagList = tagListModel.fetch();
   if (version === '0.0.1') {
     // 数据库升级  迁移数据
     recordList.forEach(record => {
@@ -47,14 +47,14 @@
       amount: 0,
     };
     recordList: RecordItem[] = recordList;
-    tags: object[] = tagList;
+    tags = window.tagList;
     tagsPage: object = {page: 0, residue: 0};
 
     mounted() {
-      const page = Math.floor(this.tags.length / 7);
-      const residue = this.tags.length - 7 * page;
-      this.tagsPage = {page: page, residue: residue};
-      return this.tagsPage;
+      // const page = Math.floor(this.tags.length / 7);
+      // const residue = this.tags.length - 7 * page;
+      // this.tagsPage = {page: page, residue: residue};
+      // return this.tagsPage;
     }
 
     onUpdateIcon(value: string) {

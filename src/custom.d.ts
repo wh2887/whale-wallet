@@ -11,3 +11,15 @@ type Tag = {
   iconName: string;
   tagText: string;
 }
+type TagListModel = {
+  data: Tag[];
+  fetch: () => Tag[];
+  create: (tagsType: Tag) => boolean;
+  update: (id: string, iconName: string, tagText: string) => boolean;
+  remove: (id: string) => boolean;
+  save: () => void;
+}
+
+interface Window {
+  tagList: Tag[];
+}
