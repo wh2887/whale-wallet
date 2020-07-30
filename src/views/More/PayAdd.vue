@@ -18,7 +18,6 @@
   import Header from '@/components/Header.vue';
   import IconWithBorder from '@/components/IconWithBorder.vue';
   import TagForm from '@/components/TagForm.vue';
-  import tagListModel from '@/models/tagListModel';
 
 
   @Component({

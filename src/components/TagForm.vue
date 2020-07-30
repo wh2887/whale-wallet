@@ -30,7 +30,6 @@
   import Vue from 'vue';
   import {Component, Prop, Watch} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
-  import tagListModel from '@/models/tagListModel';
 
   @Component({
     components: {IconWithBorder}

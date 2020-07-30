@@ -16,7 +16,6 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Header from '@/components/Header.vue';
-  import tagListModel from '@/models/tagListModel';
   import TagForm from '@/components/TagForm.vue';
 
 
@@ -31,12 +30,11 @@
 
 
     created() {
-      const id = this.$route.params.id;
-      const tag = this.tags.filter(item => item.id === id)[0];
-      if (tag) {
-        this.tag = tag;
+      this.tag = window.findTag(this.$route.params.id);
+      if (this.tag) {
         this.selectedIcon = this.tag.iconName;
-      } else {
+      }
+      if (!this.tag) {
         this.$router.replace('/404');
       }
     }

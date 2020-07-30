@@ -17,7 +17,6 @@
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import recordListModel from '@/models/recordListModel';
-  import tagListModel from '@/models/tagListModel';
 
   const recordList = recordListModel.fetch();
 

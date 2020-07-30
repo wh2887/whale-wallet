@@ -19,14 +19,12 @@
   import {Component} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
   import Header from '@/components/Header.vue';
-  import tagListModel from '@/models/tagListModel';
 
-  tagListModel.fetch();
   @Component({
     components: {Header, IconWithBorder}
   })
   export default class PayEdit extends Vue {
-    tags = tagListModel.data;
+    tags = window.tagList;
 
     jumpToAdd(type: string) {
       this.$router.push({path: '/more/payadd', query: {type: type}});

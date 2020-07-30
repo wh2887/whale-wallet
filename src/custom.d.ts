@@ -24,6 +24,7 @@ interface Window {
   tagList: Tag[];
   createTag: (obj: Tag) => void;
   removeTag: (id: string) => boolean;
-  updateTag: (id: string, iconName: string, tagText: string) => boolean;
+  updateTag: TagListModel['update'];
+  findTag: (id: string) => Tag | undefined;
 }
 

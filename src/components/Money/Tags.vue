@@ -25,7 +25,6 @@
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
-  import tagListModel from '@/models/tagListModel';
 
 
   @Component({
@@ -35,7 +34,7 @@
     @Prop() tagDataSource: string[] | undefined;
     @Prop() tagsPage!: object;
     @Prop() recordType!: string;
-    tags = tagListModel.fetch();
+    tags = window.tagList;
     type = '1';
     startIndex = 0;
     endIndex = 7;

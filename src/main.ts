@@ -14,6 +14,9 @@ Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
 window.tagList = tagListModel.fetch();
+window.findTag = (id: string) => {
+  return window.tagList.filter(item => item.id === id)[0];
+}
 window.createTag = (obj: Tag) => {
   if (obj) {
     try {
