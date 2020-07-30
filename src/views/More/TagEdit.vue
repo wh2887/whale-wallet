@@ -49,20 +49,10 @@
 
     updateTag() {
       if (this.tag) {
-        try {
-          tagListModel.update(this.tag.id, this.selectedIcon, this.tag.tagText);
-          this.$router.go(-1);
-        } catch (error) {
-          if (error.message === 'icon duplicated') {
-            window.alert('标签图标重复！请重新输入标签名！');
-          } else if (error.message === 'text duplicated') {
-            window.alert('标签名重复！请重新输入标签名！');
-          }
-        }
+        window.updateTag(this.tag.id, this.selectedIcon, this.tag.tagText);
+        this.$router.back();
       }
     }
-
-
   }
 </script>
 

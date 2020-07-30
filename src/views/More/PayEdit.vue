@@ -32,9 +32,6 @@
       this.$router.push({path: '/more/payadd', query: {type: type}});
     }
 
-    // jumpToEdit(iconName: string, tagText: string) {
-    //   this.$router.push({path: '/more/payedit', query: {iconName: iconName, tagText: tagText}});
-    // }
   }
 </script>
 

@@ -27,6 +27,22 @@ window.createTag = (obj: Tag) => {
     }
   }
 };
+window.removeTag = (id: string) => {
+  return tagListModel.remove(id);
+};
+window.updateTag = (id: string, iconName: string, tagText: string) => {
+  try {
+    tagListModel.update(id, iconName, tagText);
+  } catch (error) {
+    if (error.message === 'icon duplicated') {
+      window.alert('标签图标重复！请重新输入标签名！');
+    } else if (error.message === 'text duplicated') {
+      window.alert('标签名重复！请重新输入标签名！');
+    }
+    return false;
+  }
+  return true;
+};
 
 new Vue({
   router,
