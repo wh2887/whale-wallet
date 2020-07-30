@@ -18,6 +18,7 @@
   import NumberPad from '@/components/Money/NumberPad.vue';
   import recordListModel from '@/models/recordListModel';
   import tagListModel from '@/models/tagListModel';
+  import clone from '@/lib/clone';
 
   const version = window.localStorage.getItem('version') || '0';
   const recordList = recordListModel.fetch();
@@ -66,9 +67,7 @@
 
 
     saveRecord() {
-      const record2: RecordItem = recordListModel.clone(this.record);
-      record2.createdAt = new Date();
-      this.recordList.push(record2);
+      recordListModel.createItem(this.record);
     }
 
     @Watch('recordList')
