@@ -18,8 +18,7 @@
   import NumberPad from '@/components/Money/NumberPad.vue';
   import recordListModel from '@/models/recordListModel';
 
-  const recordList = recordListModel.fetch();
-
+  const recordList = window.recordList;
 
   const version = window.localStorage.getItem('version') || '0';
   if (version === '0.0.1') {
@@ -66,12 +65,7 @@
 
 
     saveRecord() {
-      recordListModel.createItem(this.record);
-    }
-
-    @Watch('recordList')
-    onRecordListChanged() {
-      recordListModel.save();
+      window.createRecord(this.record);
     }
   }
 </script>
