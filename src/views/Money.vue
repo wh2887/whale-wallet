@@ -21,16 +21,6 @@
   // const recordList = this.$store.recordList;
   const recordList = [] as RecordItem[];
 
-  const version = window.localStorage.getItem('version') || '0';
-  if (version === '0.0.1') {
-    // 数据库升级  迁移数据
-    recordList.forEach(record => {
-      record.createdAt = new Date(2020, 6, 22);
-    });
-    // 保存数据
-    // TODO
-    // oldStore.saveRecords();
-  }
 
   window.localStorage.setItem('version', '0.0.2');
 
@@ -51,10 +41,18 @@
       note: '',
       amount: 0,
     };
-    recordList: RecordItem[] = recordList;
 
-    created(){
-      this.$store.commit('fetchRecords')
+    created() {
+      this.$store.commit('fetchRecords');
+      const version = window.localStorage.getItem('version') || '0';
+      if (version === '0.0.1') {
+        // 数据库升级  迁移数据
+        recordList.forEach(record => {
+          record.createdAt = new Date(2020, 6, 22);
+        });
+        // 保存数据
+        this.$store.commit('saveRecords');
+      }
     }
 
     onUpdateIcon(value: string) {

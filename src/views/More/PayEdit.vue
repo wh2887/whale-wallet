@@ -26,8 +26,7 @@
     computed: {
       tags() {
         // TODO
-        // return this.$store.tagList;
-        return [] as Tag[];
+        return this.$store.state.tagList;
       }
     }
   })

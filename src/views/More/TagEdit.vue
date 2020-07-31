@@ -64,7 +64,6 @@
 </script>
 
 <style lang="scss" scoped>
-
     .payadd-wrapper {
         display: flex;
         flex-direction: column;

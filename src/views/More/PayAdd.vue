@@ -61,8 +61,9 @@
       const tagText = this.tagText;
       const obj = {id, iconName, tagText};
       if (obj) {
+        this.$store.commit('createTag',obj)
         // this.$store.createTag(obj);
-        // this.$router.back();
+        this.$router.back();
       }
     }
   }

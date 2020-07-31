@@ -1,7 +1,7 @@
 <template>
     <div>
         <ol class="tags-list">
-            <li v-for="(tag) in tags" :key="tag.iconName"
+            <li v-for="tag in tagList" :key="tag.iconName"
                 @click="$emit('update:icon',tag.iconName)">
                 <IconWithBorder :name=" tag.iconName "/>
                 <span>{{tag.tagText.slice(0,2)}}</span>
@@ -30,16 +30,18 @@
   @Component({
     components: {IconWithBorder},
     computed: {
-      tags() {
-        // TODO
-        // return this.$store.tagList;
-        return [];
+      tagList() {
+        return this.$store.state.tagList;
       }
     }
   })
   export default class Tags extends Vue {
     @Prop() recordType!: string;
     type = '1';
+
+    created() {
+      this.$store.commit('initTags');
+    }
 
     addTags() {
       if (this.recordType === '-') {
