@@ -18,7 +18,6 @@
   import Header from '@/components/Header.vue';
   import IconWithBorder from '@/components/IconWithBorder.vue';
   import TagForm from '@/components/TagForm.vue';
-  import store from '@/store/index2';
 
 
   @Component({
@@ -62,8 +61,8 @@
       const tagText = this.tagText;
       const obj = {id, iconName, tagText};
       if (obj) {
-        store.createTag(obj);
-        this.$router.back();
+        // this.$store.createTag(obj);
+        // this.$router.back();
       }
     }
   }

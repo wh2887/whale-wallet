@@ -30,7 +30,6 @@
   import Vue from 'vue';
   import {Component, Prop, Watch} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
-  import store from '@/store/index2';
 
   @Component({
     components: {IconWithBorder}
@@ -59,7 +58,9 @@
 
     removeTag() {
       if (this.tag) {
-        if (store.removeTag(this.tag.id)) {
+        // TODO
+        // if (this.$store.removeTag(this.tag.id)) {
+          if (this.$store) {
           this.$router.back();
         } else {
           window.alert('删除失败！');

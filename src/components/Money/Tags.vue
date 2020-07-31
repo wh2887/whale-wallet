@@ -25,15 +25,20 @@
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
-  import oldStore from '@/store/index2';
 
 
   @Component({
-    components: {IconWithBorder}
+    components: {IconWithBorder},
+    computed: {
+      tags() {
+        // TODO
+        // return this.$store.tagList;
+        return [];
+      }
+    }
   })
   export default class Tags extends Vue {
     @Prop() recordType!: string;
-    tags = oldStore.tagList;
     type = '1';
 
     addTags() {

@@ -2,7 +2,7 @@
     <div class="moneyBG">
         <Type :value.sync="record.type"/>
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
-        <Tags  :record-type="record.type" @update:icon="onUpdateIcon"/>
+        <Tags :record-type="record.type" @update:icon="onUpdateIcon"/>
         <Notes @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
@@ -16,9 +16,10 @@
   import Tags from '@/components/Money/Tags.vue';
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
-  import oldStore from '@/store/index2';
 
-  const recordList = oldStore.recordList;
+  // TODO
+  // const recordList = this.$store.recordList;
+  const recordList = [] as RecordItem[];
 
   const version = window.localStorage.getItem('version') || '0';
   if (version === '0.0.1') {
@@ -27,7 +28,8 @@
       record.createdAt = new Date(2020, 6, 22);
     });
     // 保存数据
-    oldStore.saveRecords();
+    // TODO
+    // oldStore.saveRecords();
   }
 
   window.localStorage.setItem('version', '0.0.2');
@@ -36,6 +38,9 @@
   @Component({
     components: {NumberPad, Notes, Tags, Output, Type},
     computed: {
+      recordList() {
+        return this.$store.state.recordList;
+      }
     }
   })
   export default class Money extends Vue {
@@ -48,7 +53,9 @@
     };
     recordList: RecordItem[] = recordList;
 
-
+    created(){
+      this.$store.commit('fetchRecords')
+    }
 
     onUpdateIcon(value: string) {
       this.record.tagsName = value;
@@ -59,7 +66,7 @@
     }
 
     saveRecord() {
-      oldStore.createRecord(this.record);
+      this.$store.commit('createRecord', this.record);
     }
   }
 </script>
