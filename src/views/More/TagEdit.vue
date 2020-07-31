@@ -17,18 +17,11 @@
   import {Component} from 'vue-property-decorator';
   import Header from '@/components/Header.vue';
   import TagForm from '@/components/TagForm.vue';
-  import Tags from '@/components/Money/Tags.vue';
 
 
   @Component({
     components: {TagForm, Header},
-    computed: {
-      tags() {
-        // TODO
-        // return this.$store.tagList
-        return [] as Tag[];
-      }
-    }
+    computed: {}
   })
   export default class TagEdit extends Vue {
     tag?: Tag;

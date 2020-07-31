@@ -31,7 +31,9 @@
     }
   })
   export default class PayEdit extends Vue {
-    // tags = this.$store.tagList;
+    beforeCreate() {
+      this.$store.commit('initTags');
+    }
 
     jumpToAdd(type: string) {
       this.$router.push({path: '/more/payadd', query: {type: type}});
