@@ -14,9 +14,9 @@ const tagStore = {
     const names = this.tagList.map(item => item.iconName);
     const tagTexts = this.tagList.map(item => item.tagText);
     if (names.indexOf(obj.iconName) >= 0) {
-      window.alert('标签图标重复，请重新选择图标！');
+      return window.alert('标签图标重复，请重新选择图标！');
     } else if (tagTexts.indexOf(obj.tagText) >= 0) {
-      window.alert('标签名称重复，请重新输入名称！');
+      return window.alert('标签名称重复，请重新输入名称！');
     } else {
       obj.id = createdId().toString();  // ID生成器得到的ID 为 'number'
       this.tagList && this.tagList.push(obj);

@@ -7,6 +7,5 @@ const store = {
   ...recordStore
 };
 
-console.log(store);
 
 export default store;

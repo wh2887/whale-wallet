@@ -32,7 +32,6 @@
     components: {IconWithBorder}
   })
   export default class Tags extends Vue {
-    @Prop() tagDataSource: string[] | undefined;
     @Prop() tagsPage!: object;
     @Prop() recordType!: string;
     tags = store.tagList;

@@ -2,7 +2,7 @@
     <div class="moneyBG">
         <Type :value.sync="record.type"/>
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
-        <Tags :tag-data-source="tags" :tags-page="tagsPage" :record-type="record.type" @update:icon="onUpdateIcon"/>
+        <Tags :tags-page="tagsPage" :record-type="record.type" @update:icon="onUpdateIcon"/>
         <Notes @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
@@ -16,9 +16,10 @@
   import Tags from '@/components/Money/Tags.vue';
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
-  import store from '@/store/index2';
+  import oldStore from '@/store/index2';
+  import store from '@/store/index.ts';
 
-  const recordList = store.recordList;
+  const recordList = oldStore.recordList;
 
   const version = window.localStorage.getItem('version') || '0';
   if (version === '0.0.1') {
@@ -27,14 +28,16 @@
       record.createdAt = new Date(2020, 6, 22);
     });
     // 保存数据
-    store.saveRecords();
+    oldStore.saveRecords();
   }
 
   window.localStorage.setItem('version', '0.0.2');
 
 
   @Component({
-    components: {NumberPad, Notes, Tags, Output, Type}
+    components: {NumberPad, Notes, Tags, Output, Type},
+    computed: {
+    }
   })
   export default class Money extends Vue {
     record: RecordItem = {
@@ -45,8 +48,8 @@
       amount: 0,
     };
     recordList: RecordItem[] = recordList;
-    tags = store.tagList;
     tagsPage: object = {page: 0, residue: 0};
+
 
     mounted() {
       // const page = Math.floor(this.tags.length / 7);
@@ -65,7 +68,7 @@
 
 
     saveRecord() {
-      store.createRecord(this.record);
+      oldStore.createRecord(this.record);
     }
   }
 </script>
