@@ -16,7 +16,6 @@
   import Tags from '@/components/Money/Tags.vue';
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
-  import recordListModel from '@/models/recordListModel';
   import store from '@/store/index2';
 
   const recordList = store.recordList;
@@ -28,7 +27,7 @@
       record.createdAt = new Date(2020, 6, 22);
     });
     // 保存数据
-    recordListModel.save();
+    store.saveRecords();
   }
 
   window.localStorage.setItem('version', '0.0.2');
