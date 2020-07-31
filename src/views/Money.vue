@@ -2,7 +2,7 @@
     <div class="moneyBG">
         <Type :value.sync="record.type"/>
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
-        <Tags :tags-page="tagsPage" :record-type="record.type" @update:icon="onUpdateIcon"/>
+        <Tags  :record-type="record.type" @update:icon="onUpdateIcon"/>
         <Notes @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
@@ -17,7 +17,6 @@
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import oldStore from '@/store/index2';
-  import store from '@/store/index.ts';
 
   const recordList = oldStore.recordList;
 
@@ -48,15 +47,8 @@
       amount: 0,
     };
     recordList: RecordItem[] = recordList;
-    tagsPage: object = {page: 0, residue: 0};
 
 
-    mounted() {
-      // const page = Math.floor(this.tags.length / 7);
-      // const residue = this.tags.length - 7 * page;
-      // this.tagsPage = {page: page, residue: residue};
-      // return this.tagsPage;
-    }
 
     onUpdateIcon(value: string) {
       this.record.tagsName = value;
@@ -65,7 +57,6 @@
     onUpdateNote(value: string) {
       this.record.note = value;
     }
-
 
     saveRecord() {
       oldStore.createRecord(this.record);
