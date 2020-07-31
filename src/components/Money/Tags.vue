@@ -25,6 +25,7 @@
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
+  import store from '@/store/index2';
 
 
   @Component({
@@ -34,7 +35,7 @@
     @Prop() tagDataSource: string[] | undefined;
     @Prop() tagsPage!: object;
     @Prop() recordType!: string;
-    tags = window.tagList;
+    tags = store.tagList;
     type = '1';
     startIndex = 0;
     endIndex = 7;

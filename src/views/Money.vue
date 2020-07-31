@@ -10,15 +10,16 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Watch} from 'vue-property-decorator';
+  import {Component} from 'vue-property-decorator';
   import Type from '@/components/Money/Type.vue';
   import Output from '@/components/Money/Output.vue';
   import Tags from '@/components/Money/Tags.vue';
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
   import recordListModel from '@/models/recordListModel';
+  import store from '@/store/index2';
 
-  const recordList = window.recordList;
+  const recordList = store.recordList;
 
   const version = window.localStorage.getItem('version') || '0';
   if (version === '0.0.1') {
@@ -45,7 +46,7 @@
       amount: 0,
     };
     recordList: RecordItem[] = recordList;
-    tags = window.tagList;
+    tags = store.tagList;
     tagsPage: object = {page: 0, residue: 0};
 
     mounted() {
@@ -65,7 +66,7 @@
 
 
     saveRecord() {
-      window.createRecord(this.record);
+      store.createRecord(this.record);
     }
   }
 </script>

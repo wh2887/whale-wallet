@@ -17,20 +17,21 @@
   import {Component} from 'vue-property-decorator';
   import Header from '@/components/Header.vue';
   import TagForm from '@/components/TagForm.vue';
+  import store from '@/store/index2';
 
 
   @Component({
     components: {TagForm, Header}
   })
   export default class TagEdit extends Vue {
-    tags = window.tagList;
+    tags = store.tagList;
     tag?: Tag;
     iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
     selectedIcon = '';
 
 
     created() {
-      this.tag = window.findTag(this.$route.params.id);
+      this.tag = store.findTag(this.$route.params.id);
       if (this.tag) {
         this.selectedIcon = this.tag.iconName;
       }
@@ -47,7 +48,7 @@
 
     updateTag() {
       if (this.tag) {
-        window.updateTag(this.tag.id, this.selectedIcon, this.tag.tagText);
+        store.updateTag(this.tag.id, this.selectedIcon, this.tag.tagText);
         this.$router.back();
       }
     }
