@@ -17,8 +17,8 @@ const store = new Vuex.Store({
     currentTag: undefined
   } as RootState,
   mutations: {
-    setCurrentTag(state,id: string){
-      state.currentTag = state.tagList.filter(item => item.id === id)[0]
+    setCurrentTag(state, id: string) {
+      state.currentTag = state.tagList.filter(item => item.id === id)[0];
     },
     fetchRecords(state) {
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
@@ -34,22 +34,42 @@ const store = new Vuex.Store({
     },
 
     initTags(state) {
-      return state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+      state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
     },
     createTag(state, obj: Tag) {
       const names = state.tagList.map(item => item.iconName);
       const tagTexts = state.tagList.map(item => item.tagText);
       if (names.indexOf(obj.iconName) >= 0) {
-        return window.alert('标签图标重复，请重新选择图标！');
+        window.alert('标签图标重复，请重新选择图标！');
       } else if (tagTexts.indexOf(obj.tagText) >= 0) {
-        return window.alert('标签名称重复，请重新输入名称！');
+        window.alert('标签名称重复，请重新输入名称！');
       } else {
         obj.id = createdId().toString();  // ID生成器得到的ID 为 'number'
         state.tagList && state.tagList.push(obj);
         // 可选链语法：  this.tagList?.push(obj);
         store.commit('saveTags');
         window.alert('添加成功！');
-        return true;
+      }
+    },
+    updateTag(state, payload: { id: string; iconName: string; tagText: string }) {
+      const {id, iconName, tagText} = payload;
+      const idList = state.tagList.map(item => item.id);
+      if (idList.indexOf(id) >= 0) {
+        const iconNames = state.tagList.map(item => item.iconName);
+        const iconTotal = iconNames.reduce((a, v) => v === iconName ? a + 1 : a, 0);
+        const tagTexts = state.tagList.map(item => item.tagText);
+        const textTotal = tagTexts.reduce((a, v) => v === tagText ? a + 1 : a, 0);
+        if (iconTotal >= 2) {
+          window.alert('标签图标重复！请重新输入标签名！');
+        } else if (textTotal >= 2) {
+          window.alert('标签名重复！请重新输入标签名！');
+        } else {
+          const tag = state.tagList.filter(item => item.id === id)[0];
+          tag.iconName = iconName;
+          tag.id = id;
+          tag.tagText = tagText;
+          store.commit('saveTags');
+        }
       }
     },
     saveTags(state) {

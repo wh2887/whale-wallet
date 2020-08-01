@@ -29,9 +29,10 @@
     get tag() {
       return this.$store.state.currentTag;
     }
+
     created() {
       const id = this.$route.params.id;
-      this.$store.commit('setCurrentTag',id);
+      this.$store.commit('setCurrentTag', id);
       if (this.tag) {
         this.selectedIcon = this.tag.iconName;
       }
@@ -47,11 +48,10 @@
     }
 
     updateTag() {
-      // TODO
-      // if (this.tag) {
-      //   store.updateTag(this.tag.id, this.selectedIcon, this.tag.tagText);
-      //   this.$router.back();
-      // }
+      if (this.tag) {
+        this.$store.commit('updateTag', {id: this.tag.id, iconName: this.selectedIcon, tagText: this.tag.tagText});
+        this.$router.back();
+      }
     }
   }
 </script>
