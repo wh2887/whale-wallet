@@ -5,7 +5,7 @@
             <TagForm :delete-toggle="true"
                      :selected-icon.sync="selectedIcon"
                      :icon-name="iconName"
-                     :tag="tag"
+                     :tag="currentTag"
                      @update:input="onUpdateInput"
             />
         </div>
@@ -26,7 +26,7 @@
     iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
     selectedIcon = '';
 
-    get tag() {
+    get currentTag() {
       return this.$store.state.currentTag;
     }
 
@@ -34,23 +34,23 @@
       const id = this.$route.params.id;
       this.$store.commit('initTags');
       this.$store.commit('setCurrentTag', id);
-      if (this.tag) {
-        this.selectedIcon = this.tag.iconName;
+      if (this.currentTag) {
+        this.selectedIcon = this.currentTag.iconName;
       }
-      if (!this.tag) {
+      if (!this.currentTag) {
         this.$router.replace('/404');
       }
     }
 
     onUpdateInput(value: string) {
-      if (this.tag) {
-        this.tag.tagText = value;
+      if (this.currentTag) {
+        this.currentTag.tagText = value;
       }
     }
 
     updateTag() {
-      if (this.tag) {
-        this.$store.commit('updateTag', {id: this.tag.id, iconName: this.selectedIcon, tagText: this.tag.tagText});
+      if (this.currentTag) {
+        this.$store.commit('updateTag', {id: this.currentTag.id, iconName: this.selectedIcon, tagText: this.currentTag.tagText});
         this.$router.back();
       }
     }
