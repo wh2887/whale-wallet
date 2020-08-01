@@ -32,6 +32,7 @@
 
     created() {
       const id = this.$route.params.id;
+      this.$store.commit('initTags');
       this.$store.commit('setCurrentTag', id);
       if (this.tag) {
         this.selectedIcon = this.tag.iconName;
