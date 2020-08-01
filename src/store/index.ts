@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createdId from '@/lib/createdId';
+import router from '@/router';
 
 Vue.use(Vuex);
 
@@ -70,6 +71,24 @@ const store = new Vuex.Store({
           tag.tagText = tagText;
           store.commit('saveTags');
         }
+      }
+    },
+
+    removeTag(state, id: string) {
+      let index = -1;
+      for (let i = 0; i < state.tagList.length; i++) {
+        if (state.tagList[i].id === id) {
+          index = i;
+          break;
+        }
+      }
+      if (index>=0){
+        state.tagList.splice(index, 1);
+        store.commit('saveTags');
+        window.alert('删除成功！')
+        router.back()
+      }else {
+        window.alert('删除失败！')
       }
     },
     saveTags(state) {
