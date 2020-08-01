@@ -21,17 +21,17 @@
 
   @Component({
     components: {TagForm, Header},
-    computed: {}
   })
   export default class TagEdit extends Vue {
-    tag?: Tag;
     iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
     selectedIcon = '';
 
-
+    get tag() {
+      return this.$store.state.currentTag;
+    }
     created() {
-      // TODO
-      // this.tag = this.$store.findTag(this.$route.params.id);
+      const id = this.$route.params.id;
+      this.$store.commit('setCurrentTag',id);
       if (this.tag) {
         this.selectedIcon = this.tag.iconName;
       }
