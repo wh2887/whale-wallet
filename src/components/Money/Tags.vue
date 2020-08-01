@@ -29,15 +29,13 @@
 
   @Component({
     components: {IconWithBorder},
-    computed: {
-      tagList() {
-        return this.$store.state.tagList;
-      }
-    }
   })
   export default class Tags extends Vue {
     @Prop() recordType!: string;
     type = '1';
+    get tagList() {
+      return this.$store.state.tagList;
+    }
 
     created() {
       this.$store.commit('initTags');

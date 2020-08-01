@@ -23,14 +23,11 @@
 
   @Component({
     components: {Header, IconWithBorder},
-    computed: {
-      tags() {
-        // TODO
-        return this.$store.state.tagList;
-      }
-    }
   })
   export default class PayEdit extends Vue {
+    get tags() {
+      return this.$store.state.tagList;
+    }
     beforeCreate() {
       this.$store.commit('initTags');
     }
