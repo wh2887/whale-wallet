@@ -1,6 +1,6 @@
 <template>
     <div class="moneyBG">
-        <Type :value.sync="record.type"/>
+        <Tab :value.sync="record.type " left-value="收入" right-value="支出"/>
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
         <Tags :record-type="record.type" @update:icon="onUpdateIcon"/>
         <Notes @update:value="onUpdateNote"/>
@@ -11,33 +11,24 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import Type from '@/components/Money/Type.vue';
   import Output from '@/components/Money/Output.vue';
   import Tags from '@/components/Money/Tags.vue';
   import Notes from '@/components/Money/Notes.vue';
   import NumberPad from '@/components/Money/NumberPad.vue';
-
-  // TODO
-  // const recordList = this.$store.recordList;
-  const recordList = [] as RecordItem[];
+  import defaultRecordList from '@/constants/defaultRecordList';
+  import Tab from '@/components/Money/Tab.vue';
 
 
   window.localStorage.setItem('version', '0.0.2');
 
-
   @Component({
-    components: {NumberPad, Notes, Tags, Output, Type},
+    components: {Tab, NumberPad, Notes, Tags, Output},
   })
   export default class Money extends Vue {
-    record: RecordItem = {
-      type: '-',
-      output: '',
-      tagsName: '',
-      note: '',
-      amount: 0,
-    };
+    record = defaultRecordList;
+
     get recordList() {
-      return this.$store.state.recordList;
+      return this.$store.state.recordList as RecordItem[];
     }
 
     created() {
@@ -45,7 +36,7 @@
       const version = window.localStorage.getItem('version') || '0';
       if (version === '0.0.1') {
         // 数据库升级  迁移数据
-        recordList.forEach(record => {
+        this.recordList.forEach(record => {
           record.createdAt = new Date(2020, 6, 22);
         });
         // 保存数据
