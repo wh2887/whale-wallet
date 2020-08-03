@@ -37,7 +37,7 @@
       if (version === '0.0.1') {
         // 数据库升级  迁移数据
         this.recordList.forEach(record => {
-          record.createdAt = new Date(2020, 6, 22);
+          record.createdAt = new Date(2020, 6, 22).toISOString();
         });
         // 保存数据
         this.$store.commit('saveRecords');

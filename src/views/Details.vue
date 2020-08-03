@@ -5,6 +5,17 @@
             <DetailsHeader/>
             <Tab :data-source="intervalList" :value.sync="interval"/>
         </div>
+        <div>
+            <ol>
+                <li v-for="(group,index) in result" :key="index">
+                    <h3>{{group.title}}</h3>
+                    <ol v-for="item in group.items" :key="item.id">
+                        {{item.createdAt}} ||||
+                        {{item.amount}}
+                    </ol>
+                </li>
+            </ol>
+        </div>
     </Layout>
 </template>
 
@@ -24,6 +35,28 @@
     show = false;  //设置Money组件 默认是否显示 true默认显示 false默认不显示
     interval = 'day';
     intervalList = intervalList;
+
+    beforeCreate() {
+      this.$store.commit('fetchRecords');
+    }
+
+    get recordList() {
+      return (this.$store.state as RootState).recordList;
+    }
+
+    get result() {
+      const {recordList} = this;
+      type HashTableValue = { title: string; items: RecordItem[] }
+
+      const hashTable: { [key: string]: HashTableValue } = {};
+      for (let i = 0; i < recordList.length; i++) {
+        const [data, time] = recordList[i].createdAt!.split('T');
+        console.log(data);
+        hashTable[data] = hashTable[data] || {title: data, items: []};
+        hashTable[data].items.push(recordList[i]);
+      }
+      return hashTable;
+    }
 
     toggle(param: boolean) {
       this.show = param;
