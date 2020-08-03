@@ -3,7 +3,7 @@
         <Money v-show="show" class="money"/>
         <div class="details-wrapper">
             <DetailsHeader/>
-            <Tab :data-source="array" :value.sync="interval"/>
+            <Tab :data-source="intervalList" :value.sync="interval"/>
         </div>
     </Layout>
 </template>
@@ -14,21 +14,16 @@
   import Money from '@/views/Money.vue';
   import DetailsHeader from '@/components/Details/DetailsHeader.vue';
   import Tab from '@/components/Money/Tab.vue';
-  import defaultRecordList from '@/constants/defaultRecordList';
+  import intervalList from '@/constants/intervalList';
 
 
   @Component({
     components: {Tab, DetailsHeader, Money}
   })
   export default class Details extends Vue {
-    interval = 'day';
     show = false;  //设置Money组件 默认是否显示 true默认显示 false默认不显示
-    record = defaultRecordList;
-    array = [
-      {text: '按月', value: 'month'},
-      {text: '按周', value: 'week'},
-      {text: '按天', value: 'day'},
-    ];
+    interval = 'day';
+    intervalList = intervalList;
 
     toggle(param: boolean) {
       this.show = param;

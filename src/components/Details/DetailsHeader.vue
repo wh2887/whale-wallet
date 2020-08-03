@@ -4,7 +4,7 @@
             <span>7月结余</span>
             <span>￥ 1500.00</span>
         </div>
-        <Tab :value.sync="record.type" :data-source="array" class-prefix="header"/>
+        <Tab :value.sync="record.type" :data-source="recordTypeList" class-prefix="header"/>
     </div>
 </template>
 
@@ -13,16 +13,14 @@
   import {Component} from 'vue-property-decorator';
   import defaultRecordList from '@/constants/defaultRecordList';
   import Tab from '@/components/Money/Tab.vue';
+  import recordTypeList from '@/constants/recordTypeList';
 
   @Component({
     components: {Tab}
   })
   export default class DetailsHeader extends Vue {
     record = defaultRecordList;
-    array = [
-      {text: '收入', value: '+'},
-      {text: '支出', value: '-'},
-    ];
+    recordTypeList = recordTypeList
   }
 </script>
 

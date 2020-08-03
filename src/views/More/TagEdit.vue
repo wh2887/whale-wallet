@@ -17,13 +17,14 @@
   import {Component} from 'vue-property-decorator';
   import Header from '@/components/Header.vue';
   import TagForm from '@/components/TagForm.vue';
+  import payIconList from '@/constants/payIconList';
 
 
   @Component({
     components: {TagForm, Header},
   })
   export default class TagEdit extends Vue {
-    iconName: string[] = ['dog3', 'breakfast', 'lunch', 'sancan', 'traffic', 'amusement', 'chufang', 'travel', 'close', 'girlfriend'];
+    iconName = payIconList;
     selectedIcon = '';
 
     get currentTag() {
@@ -50,7 +51,11 @@
 
     updateTag() {
       if (this.currentTag) {
-        this.$store.commit('updateTag', {id: this.currentTag.id, iconName: this.selectedIcon, tagText: this.currentTag.tagText});
+        this.$store.commit('updateTag', {
+          id: this.currentTag.id,
+          iconName: this.selectedIcon,
+          tagText: this.currentTag.tagText
+        });
         this.$router.back();
       }
     }
