@@ -4,6 +4,9 @@
         <div class="details-wrapper">
             <DetailsHeader/>
             <Tab :data-source="intervalList" :value.sync="interval"/>
+            <div class="detail-list">
+                <DetailList :data-source="result"/>
+            </div>
         </div>
         <div>
             <ol>
@@ -26,10 +29,11 @@
   import DetailsHeader from '@/components/Details/DetailsHeader.vue';
   import Tab from '@/components/Money/Tab.vue';
   import intervalList from '@/constants/intervalList';
+  import DetailList from '@/components/Details/DetailList.vue';
 
 
   @Component({
-    components: {Tab, DetailsHeader, Money}
+    components: {DetailList, Tab, DetailsHeader, Money}
   })
   export default class Details extends Vue {
     show = false;  //设置Money组件 默认是否显示 true默认显示 false默认不显示
@@ -51,7 +55,6 @@
       const hashTable: { [key: string]: HashTableValue } = {};
       for (let i = 0; i < recordList.length; i++) {
         const [data, time] = recordList[i].createdAt!.split('T');
-        console.log(data);
         hashTable[data] = hashTable[data] || {title: data, items: []};
         hashTable[data].items.push(recordList[i]);
       }

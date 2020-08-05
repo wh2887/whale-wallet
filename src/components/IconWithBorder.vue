@@ -16,9 +16,9 @@
 
     .icon-border {
         width: 38px;
+        height: 38px;
         font-size: 1.5em;
         line-height: 1.5em;
-        padding: 0 6px;
         border: 1px solid $color-highlight;
         border-radius: 10px;
     }

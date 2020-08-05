@@ -1,6 +1,6 @@
 <template>
     <div class="moneyBG">
-        <Tab :value.sync="record.type " left-value="收入" right-value="支出"/>
+        <Tab :value.sync="record.type " :data-source="recordTypeList"/>
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
         <Tags :record-type="record.type" @update:icon="onUpdateIcon"/>
         <Notes @update:value="onUpdateNote"/>
@@ -17,6 +17,7 @@
   import NumberPad from '@/components/Money/NumberPad.vue';
   import defaultRecordList from '@/constants/defaultRecordList';
   import Tab from '@/components/Money/Tab.vue';
+  import recordTypeList from '@/constants/recordTypeList';
 
 
   window.localStorage.setItem('version', '0.0.2');
@@ -26,6 +27,7 @@
   })
   export default class Money extends Vue {
     record = defaultRecordList;
+    recordTypeList = recordTypeList;
 
     get recordList() {
       return this.$store.state.recordList as RecordItem[];
