@@ -30,6 +30,8 @@
   import Tab from '@/components/Money/Tab.vue';
   import intervalList from '@/constants/intervalList';
   import DetailList from '@/components/Details/DetailList.vue';
+  import clone from '@/lib/clone';
+  import dayjs from 'dayjs';
 
 
   @Component({
@@ -52,13 +54,8 @@
       const {recordList} = this;
       type HashTableValue = { title: string; items: RecordItem[] }
 
-      const hashTable: { [key: string]: HashTableValue } = {};
-      for (let i = 0; i < recordList.length; i++) {
-        const [data, time] = recordList[i].createdAt!.split('T');
-        hashTable[data] = hashTable[data] || {title: data, items: []};
-        hashTable[data].items.push(recordList[i]);
-      }
-      return hashTable;
+      const newList = clone(recordList).sort((a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf());
+      return [];
     }
 
     toggle(param: boolean) {
