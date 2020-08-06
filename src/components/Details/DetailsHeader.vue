@@ -4,23 +4,32 @@
             <span>7月结余</span>
             <span>￥ 1500.00</span>
         </div>
-        <Tab :value.sync="record.type" :data-source="recordTypeList" class-prefix="header"/>
+        <Tab :value.sync="record.type" :data-source="recordTypeList" class-prefix="header"
+             @click.native="getType(record.type)"/>
     </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Prop} from 'vue-property-decorator';
   import defaultRecordList from '@/constants/defaultRecordList';
   import Tab from '@/components/Money/Tab.vue';
   import recordTypeList from '@/constants/recordTypeList';
+
 
   @Component({
     components: {Tab}
   })
   export default class DetailsHeader extends Vue {
+    @Prop() type!: string;
     record = defaultRecordList;
-    recordTypeList = recordTypeList
+    recordTypeList = recordTypeList;
+
+
+    getType(value: string) {
+      this.$emit('update:value', value);
+    }
+
   }
 </script>
 
@@ -47,7 +56,8 @@
                 font-size: 1em;
             }
         }
-        .header-tab-item{
+
+        .header-tab-item {
 
         }
 
