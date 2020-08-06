@@ -6,6 +6,7 @@ type RootState = {
 type RecordItem = {
   type: string;
   output: string;
+  tags: Tag[];
   tagsName: string;
   note: string;
   amount: number;
@@ -16,7 +17,4 @@ type Tag = {
   iconName: string;
   tagText: string;
 }
-
-// interface Window {
-// }
 

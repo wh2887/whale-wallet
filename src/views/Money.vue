@@ -1,7 +1,7 @@
 <template>
     <div class="moneyBG">
         <Tab :value.sync="record.type " :data-source="recordTypeList"/>
-        <Output :update-icon="record.tagsName" :update-output="record.amount"/>
+        <Output :update-icon="record.tags.iconName" :update-output="record.amount"/>
         <Tags :record-type="record.type" @update:icon="onUpdateIcon"/>
         <Notes :value='record.note' @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
@@ -46,8 +46,9 @@
       }
     }
 
-    onUpdateIcon(value: string) {
-      this.record.tagsName = value;
+    onUpdateIcon(value: Tag) {
+      this.record.tags.iconName = value.iconName;
+      this.record.tags.tagText = value.tagText;
     }
 
     onUpdateNote(value: string) {

@@ -25,7 +25,7 @@
     components: {DetailList, Tab, DetailsHeader, Money}
   })
   export default class Details extends Vue {
-    show = false;  //设置Money组件 默认是否显示 true默认显示 false默认不显示
+    show = true;  //设置Money组件 默认是否显示 true默认显示 false默认不显示
     type = '-';
 
     beforeCreate() {

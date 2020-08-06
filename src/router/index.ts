@@ -51,6 +51,10 @@ const routes: Array<RouteConfig> = [
     component: IncomeEdit
   },
   {
+    path: '/more/incomeadd',
+    component: IncomeEdit
+  },
+  {
     path: '*',
     component: NotFound
   },

@@ -2,7 +2,7 @@
     <div>
         <ol class="tags-list">
             <li v-for="tag in tagList" :key="tag.iconName"
-                @click="$emit('update:icon',tag.iconName)">
+                @click="$emit('update:icon',tag)">
                 <IconWithBorder :name=" tag.iconName "/>
                 <span>{{tag.tagText.slice(0,2)}}</span>
             </li>
@@ -33,6 +33,7 @@
   export default class Tags extends Vue {
     @Prop() recordType!: string;
     type = '1';
+
     get tagList() {
       return this.$store.state.tagList;
     }
@@ -50,15 +51,7 @@
     }
 
     getPage(type: string) {
-      if (type !== '1' && type !== '2' && type !== '3') {
-        throw new Error('type is unknown');
-      } else if (type === '1') {
-        this.type = type;
-      } else if (type === '2') {
-        this.type = type;
-      } else if (type === '3') {
-        this.type = type;
-      }
+      this.type = type;
       this.$emit('update:page', this.type);
     }
 

@@ -5,11 +5,12 @@
                 <h3>{{beautify(group.title)}}</h3>
                 <h3>支： ￥{{group.total}}</h3>
             </div>
-            <ol class="bottom" v-for="item in group.items" :key="item.id">
+            <ol class="bottom" v-for="item in group.items" :key="item.tags.id">
                 <div class="left">
-                    <IconWithBorder name="dog3"/>
+                    {{item.tags.id}}
+                    <IconWithBorder :name="item.tags.iconName"/>
                     <div class="left-text">
-                        <p>{{item.tagsName}}</p>
+                        <p>{{item.tags.tagText}}</p>
                         <p>备注：{{item.note || '无备注'}}</p>
                     </div>
                 </div>
