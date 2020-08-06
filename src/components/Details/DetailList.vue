@@ -5,9 +5,8 @@
                 <h3>{{beautify(group.title)}}</h3>
                 <h3>支： ￥{{group.total}}</h3>
             </div>
-            <ol class="bottom" v-for="item in group.items" :key="item.tags.id">
+            <ol class="bottom" v-for="(item,index) in group.items" :key="index">
                 <div class="left">
-                    {{item.tags.id}}
                     <IconWithBorder :name="item.tags.iconName"/>
                     <div class="left-text">
                         <p>{{item.tags.tagText}}</p>
@@ -20,7 +19,7 @@
             </ol>
         </li>
     </ol>
-    <div v-else>
+    <div v-else class="no-detail-list">
         目前没有相关记录
     </div>
 </template>
@@ -35,7 +34,7 @@
     components: {IconWithBorder}
   })
   export default class DetailList extends Vue {
-    @Prop() dataSource!: object;
+    @Prop() dataSource!: {}[];
 
     beautify(string: string) {
       const day = dayjs(string);
@@ -102,5 +101,10 @@
                 }
             }
         }
+    }
+
+    .no-detail-list {
+        padding: 16px;
+        text-align: center;
     }
 </style>

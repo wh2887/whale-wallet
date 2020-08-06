@@ -3,9 +3,7 @@
         <Money v-show="show" class="money"/>
         <div class="details-wrapper">
             <DetailsHeader :value="type" @update:value="onTypeChanged"/>
-            <div class="detail-list">
-                <DetailList :data-source="groupedList"/>
-            </div>
+            <DetailList :data-source="groupedList"/>
         </div>
     </Layout>
 </template>
