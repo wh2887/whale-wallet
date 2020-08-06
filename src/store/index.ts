@@ -77,13 +77,13 @@ const store = new Vuex.Store({
           break;
         }
       }
-      if (index>=0){
+      if (index >= 0) {
         state.tagList.splice(index, 1);
         store.commit('saveTags');
-        window.alert('删除成功！')
-        router.back()
-      }else {
-        window.alert('删除失败！')
+        window.alert('删除成功！');
+        router.back();
+      } else {
+        window.alert('删除失败！');
       }
     },
     saveTags(state) {

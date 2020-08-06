@@ -1,5 +1,5 @@
 <template>
-    <ol class="list">
+    <ol class="list" v-if="dataSource.length>0">
         <li v-for="(group,index) in dataSource" :key="index">
             <div class="top">
                 <h3>{{beautify(group.title)}}</h3>
@@ -19,6 +19,9 @@
             </ol>
         </li>
     </ol>
+    <div v-else>
+        目前没有相关记录
+    </div>
 </template>
 
 <script lang="ts">

@@ -3,7 +3,7 @@
         <Tab :value.sync="record.type " :data-source="recordTypeList"/>
         <Output :update-icon="record.tagsName" :update-output="record.amount"/>
         <Tags :record-type="record.type" @update:icon="onUpdateIcon"/>
-        <Notes @update:value="onUpdateNote"/>
+        <Notes :value='record.note' @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
 </template>
@@ -56,6 +56,7 @@
 
     saveRecord() {
       this.$store.commit('createRecord', this.record);
+      this.record.note = '';
     }
   }
 </script>
