@@ -3,7 +3,7 @@
         <li v-for="(group,index) in dataSource" :key="index">
             <div class="top">
                 <h3>{{beautify(group.title)}}</h3>
-                <h3>支： 30.00</h3>
+                <h3>支： ￥{{group.total}}</h3>
             </div>
             <ol class="bottom" v-for="item in group.items" :key="item.id">
                 <div class="left">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <p>30.00</p>
+                    <p>￥{{item.amount}}</p>
                 </div>
             </ol>
         </li>
@@ -42,10 +42,9 @@
         return '昨天';
       } else if (day.isSame(now.subtract(2, 'day'), 'day')) {
         return '前天';
-      }else if (day.isSame(now,'year')){
-        return day.format('MM月DD日')
-      }
-      else {
+      } else if (day.isSame(now, 'year')) {
+        return day.format('MM月DD日');
+      } else {
         return day.format('YYYY年MM月DD日');
       }
 

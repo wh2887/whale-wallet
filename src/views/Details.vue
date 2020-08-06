@@ -45,7 +45,6 @@
 
     onTypeChanged(value: string) {
       this.type = value;
-      console.log(this.type);
     }
 
     get recordList() {

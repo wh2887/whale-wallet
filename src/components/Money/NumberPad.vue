@@ -24,7 +24,7 @@
 
   @Component
   export default class NumberPad extends Vue {
-    @Prop() value!: number;
+    @Prop(Number) value!: number;
     output = this.value.toString();
 
     @Watch('output')
@@ -33,7 +33,7 @@
     }
 
     emit() {
-      this.$emit('update:value', this.output);
+      this.$emit('update:value', parseFloat(this.output));
     }
 
     inputContent(event: MouseEvent) {
@@ -72,7 +72,7 @@
     }
 
     ok() {
-      this.$emit('submit', this.output);
+      this.$emit('submit', parseFloat(this.output));
       this.output = '0';
     }
   }
