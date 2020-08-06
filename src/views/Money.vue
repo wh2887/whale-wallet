@@ -49,6 +49,7 @@
     onUpdateIcon(value: Tag) {
       this.record.tags.iconName = value.iconName;
       this.record.tags.tagText = value.tagText;
+      this.record.tags.type = value.type;
     }
 
     onUpdateNote(value: string) {

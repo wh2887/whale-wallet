@@ -1,8 +1,7 @@
 export default {
   type: '-',
   output: '',
-  tags: {id: '', iconName: '', tagText: ''},
-  tagsName: '',
+  tags: {id: '', iconName: '', type: '', tagText: ''},
   note: '',
   amount: 0,
 };

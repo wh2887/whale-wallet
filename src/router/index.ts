@@ -9,6 +9,7 @@ import PayEdit from '@/views/More/PayEdit.vue';
 import IncomeEdit from '@/views/More/IncomeEdit.vue';
 import PayAdd from '@/views/More/PayAdd.vue';
 import TagEdit from '@/views/More/TagEdit.vue';
+import IncomeAdd from '@/views/More/IncomeAdd.vue';
 
 Vue.use(VueRouter);
 
@@ -52,7 +53,11 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/more/incomeadd',
-    component: IncomeEdit
+    component: IncomeAdd
+  },
+  {
+    path: '/more/incomeedit/:id',
+    component: TagEdit
   },
   {
     path: '*',

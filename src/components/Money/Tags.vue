@@ -2,11 +2,16 @@
     <div>
         <ol class="tags-list">
             <li v-for="tag in tagList" :key="tag.iconName"
-                @click="$emit('update:icon',tag)">
-                <IconWithBorder :name=" tag.iconName "/>
-                <span>{{tag.tagText.slice(0,2)}}</span>
+                @click="$emit('update:icon',tag)" v-show="recordType === tag.type">
+                <div v-if="tag.type === '-'">
+                    <IconWithBorder :name=" tag.iconName "/>
+                    <span>{{tag.tagText.slice(0,2)}}</span>
+                </div>
+                <div v-if="tag.type === '+'">
+                    <IconWithBorder :name=" tag.iconName "/>
+                    <span>{{tag.tagText.slice(0,2)}}</span>
+                </div>
             </li>
-
             <li @click="addTags">
                 <IconWithBorder :name=" 'add' "/>
                 <span>添加</span>
@@ -14,9 +19,9 @@
             <i></i><i></i><i></i><i></i>
         </ol>
         <ul class="dots">
-            <li :class="{selected:type=== '1'}" @click="getPage('1')"></li>
-            <li :class="{selected:type=== '2'}" @click="getPage('2')"></li>
-            <li :class="{selected:type=== '3'}" @click="getPage('3')"></li>
+            <li :class="{selected:type=== '1'}" @click="selected('1')"></li>
+            <li :class="{selected:type=== '2'}" @click="selected('2')"></li>
+            <li :class="{selected:type=== '3'}" @click="selected('3')"></li>
         </ul>
     </div>
 </template>
@@ -50,9 +55,8 @@
       }
     }
 
-    getPage(type: string) {
+    selected(type: string) {
       this.type = type;
-      this.$emit('update:page', this.type);
     }
 
   }

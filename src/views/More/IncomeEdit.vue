@@ -1,8 +1,8 @@
 <template>
 
     <Layout>
-        <Header header-title="编辑收入分类" button-content="添加" @click="jumpToAdd('+',)"/>
-        <router-link class="icon-list" v-for="tag in tags" :key="tag.id"
+        <Header header-title="编辑收入分类" button-content="添加" @click="jumpToAdd('+')"/>
+        <router-link class="icon-list" v-for="tag in tags" :key="tag.id" v-show="tag.type === '+'"
                      :to="`/more/incomeedit/${tag.id}`">
             <div class="left">
                 <IconWithBorder :name="tag.iconName"/>
@@ -34,7 +34,7 @@
     }
 
     jumpToAdd(type: string) {
-      if (type !== '-' && type === '+') {window.alert('');}
+      if (type !== '-' && type !== '+') {window.alert('xxx');}
       if (type === '-') {
         this.$router.push({path: '/more/payadd', query: {type: type}});
       } else if (type === '+') {

@@ -58,10 +58,11 @@
     createTag() {
       const id = this.selectedIcon;
       const iconName = this.selectedIcon;
+      const type = '-';
       const tagText = this.tagText;
-      const obj = {id, iconName, tagText};
+      const obj = {id, iconName, type, tagText};
       if (obj) {
-        this.$store.commit('createTag',obj)
+        this.$store.commit('createTag', obj);
         this.$router.back();
       }
     }

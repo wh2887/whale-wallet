@@ -7,7 +7,6 @@ type RecordItem = {
   type: string;
   output: string;
   tags: Tag[];
-  tagsName: string;
   note: string;
   amount: number;
   createdAt?: string;
@@ -15,6 +14,7 @@ type RecordItem = {
 type Tag = {
   id: string;
   iconName: string;
+  type: string;
   tagText: string;
 }
 

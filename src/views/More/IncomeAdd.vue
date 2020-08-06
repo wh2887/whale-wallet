@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <div class="payadd-wrapper">
-            <Header header-title="添加支出分类" button-content="确定" @click="createTag"/>
+            <Header header-title="添加收入分类" button-content="确定" @click="createTag"/>
             <TagForm :delete-toggle="false"
                      :selected-icon.sync="selectedIcon"
                      :icon-name="iconName"
@@ -27,9 +27,9 @@
     // iconName 支出分类的图标库
     iconName: string[] = [
       'jianzhi',
-      'hongbao',
-      'jijing',
-      'gongzi',
+      'hongBao',
+      'jiJing',
+      'gongZi',
       'Gupiao',
     ];
     selectedIcon = '';
@@ -43,8 +43,9 @@
     createTag() {
       const id = this.selectedIcon;
       const iconName = this.selectedIcon;
+      const type = '+';
       const tagText = this.tagText;
-      const obj = {id, iconName, tagText};
+      const obj = {id, iconName, type, tagText};
       if (obj) {
         this.$store.commit('createTag', obj);
         this.$router.back();

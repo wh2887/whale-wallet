@@ -1,8 +1,8 @@
 <template>
     <Layout>
-        <Header header-title="编辑支出分类" button-content="添加" @click="jumpToAdd('-',)"/>
+        <Header header-title="编辑支出分类" button-content="添加" @click="jumpToAdd('-')"/>
         <router-link class="icon-list" v-for="tag in tags" :key="tag.id"
-                     :to="`/more/payedit/${tag.id}`">
+                     :to="`/more/payedit/${tag.id}`" v-show="tag.type === '-'">
             <div class="left">
                 <IconWithBorder :name="tag.iconName"/>
                 <span>{{tag.tagText}}</span>
@@ -28,6 +28,7 @@
     get tags() {
       return this.$store.state.tagList;
     }
+
     beforeCreate() {
       this.$store.commit('initTags');
     }
