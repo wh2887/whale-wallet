@@ -1,6 +1,7 @@
 <template>
     <div>
         <ol class="tags-list">
+
             <li v-for="tag in getCurrentTagList(recordType)" :key="tag.iconName"
                 @click="$emit('update:icon',tag)">
                 <div>
@@ -8,6 +9,7 @@
                     <span>{{tag.tagText.slice(0,2)}}</span>
                 </div>
             </li>
+
             <li @click="addTags">
                 <IconWithBorder :name=" 'add' "/>
                 <span>添加</span>
@@ -15,9 +17,9 @@
             <i></i><i></i><i></i><i></i>
         </ol>
         <ul class="dots">
-            <li :class="{selected:type=== '1'}" @click="selected('1')"></li>
-            <li :class="{selected:type=== '2'}" @click="selected('2')"></li>
-            <li :class="{selected:type=== '3'}" @click="selected('3')"></li>
+            <li :class="{selected:currentPage=== 1}" @click="selected(1)"></li>
+            <li :class="{selected:currentPage=== 2}" @click="selected(2)"></li>
+            <li :class="{selected:currentPage=== 3}" @click="selected(3)"></li>
         </ul>
     </div>
 </template>
@@ -31,9 +33,13 @@
   @Component({
     components: {IconWithBorder},
   })
+
   export default class Tags extends Vue {
     @Prop() recordType!: string;
-    type = '1';
+    currentPage = 1;
+    tagLength = 0;
+    startPage = 0;
+    endPage = 6;
 
     created() {
       this.$store.commit('initTags');
@@ -41,6 +47,13 @@
 
     get tagList() {
       return this.$store.state.tagList;
+    }
+
+    getTagLength() {
+      const tagList = this.getCurrentTagList(this.recordType);
+      if (tagList) {
+        this.tagLength = tagList.length;
+      }
     }
 
     getCurrentTagList(type: string) {
@@ -57,7 +70,7 @@
         }
       }
       if (type === '-') {
-        return payTagList;
+        return payTagList.filter((item, index) => index >= this.startPage && index <= this.endPage);
       } else if (type === '+') {
         return incomeTagList;
       }
@@ -71,8 +84,18 @@
       }
     }
 
-    selected(type: string) {
-      this.type = type;
+    selected(page: number) {
+      this.currentPage = page;
+      if (this.currentPage === 1) {
+        this.startPage = 0;
+        this.endPage = 6;
+      } else if (this.currentPage === 2) {
+        this.startPage = 7;
+        this.endPage = 13;
+      } else if (this.currentPage === 3) {
+        this.startPage = 14;
+        this.endPage = 21;
+      }
     }
 
   }
@@ -83,6 +106,7 @@
 
     .tags-list {
         width: 87vw;
+        min-height: 21vh;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
