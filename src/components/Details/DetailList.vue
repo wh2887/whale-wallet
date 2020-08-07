@@ -61,6 +61,9 @@
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+        overflow-y: scroll;
+        height: 700px;
+        padding-bottom: 18vh;
 
         > li {
             width: 90vw;

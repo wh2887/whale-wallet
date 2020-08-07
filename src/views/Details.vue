@@ -3,7 +3,9 @@
         <Money v-show="show" class="money"/>
         <div class="details-wrapper">
             <DetailsHeader :value="type" @update:value="onTypeChanged"/>
-            <DetailList :data-source="groupedList"/>
+            <div class="bottom">
+                <DetailList :data-source="groupedList"/>
+            </div>
         </div>
     </Layout>
 </template>
@@ -89,5 +91,23 @@
         flex-direction: column;
         align-items: center;
         margin-top: 14px;
+        overflow: auto;
+
+        > :first-child {
+        }
+
+        > .bottom {
+            /*隐藏滚动条*/
+            -ms-overflow-style: none;
+            ::-webkit-scrollbar {
+                width: 0
+            }
+
+            border-radius: 10px;
+            position: fixed;
+            top: 18vh;
+            overflow: hidden;
+            height: 100%;
+        }
     }
 </style>

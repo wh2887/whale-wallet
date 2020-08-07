@@ -37,7 +37,6 @@
   export default class Tags extends Vue {
     @Prop() recordType!: string;
     currentPage = 1;
-    tagLength = 0;
     startPage = 0;
     endPage = 6;
 
@@ -47,13 +46,6 @@
 
     get tagList() {
       return this.$store.state.tagList;
-    }
-
-    getTagLength() {
-      const tagList = this.getCurrentTagList(this.recordType);
-      if (tagList) {
-        this.tagLength = tagList.length;
-      }
     }
 
     getCurrentTagList(type: string) {
