@@ -1,13 +1,9 @@
 <template>
     <div>
         <ol class="tags-list">
-            <li v-for="tag in tagList" :key="tag.iconName"
-                @click="$emit('update:icon',tag)" v-show="recordType === tag.type">
-                <div v-if="tag.type === '-'">
-                    <IconWithBorder :name=" tag.iconName "/>
-                    <span>{{tag.tagText.slice(0,2)}}</span>
-                </div>
-                <div v-if="tag.type === '+'">
+            <li v-for="tag in getCurrentTagList(recordType)" :key="tag.iconName"
+                @click="$emit('update:icon',tag)">
+                <div>
                     <IconWithBorder :name=" tag.iconName "/>
                     <span>{{tag.tagText.slice(0,2)}}</span>
                 </div>
@@ -39,12 +35,32 @@
     @Prop() recordType!: string;
     type = '1';
 
+    created() {
+      this.$store.commit('initTags');
+    }
+
     get tagList() {
       return this.$store.state.tagList;
     }
 
-    created() {
-      this.$store.commit('initTags');
+    getCurrentTagList(type: string) {
+      const oldTagList = this.tagList;
+      const payTagList = [];
+      const incomeTagList = [];
+      for (let i = 0; i < oldTagList.length; i++) {
+        if (oldTagList[i].type === '-') {
+          payTagList.push(oldTagList[i]);
+        } else if (oldTagList[i].type === '+') {
+          incomeTagList.push(oldTagList[i]);
+        } else {
+          return window.alert('unknown tag\'stype');
+        }
+      }
+      if (type === '-') {
+        return payTagList;
+      } else if (type === '+') {
+        return incomeTagList;
+      }
     }
 
     addTags() {

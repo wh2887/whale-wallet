@@ -57,8 +57,11 @@
     }
 
     saveRecord() {
-      this.$store.commit('createRecord', this.record);
-      this.record.note = '';
+      if (this.record.tags.iconName === '') {
+        window.alert('请选择一个图标分类！');
+      } else {
+        this.$store.commit('createRecord', this.record);
+      }
     }
   }
 </script>
