@@ -110,7 +110,6 @@
                 height: 68*2 + 10px;
                 float: right;
                 margin-right: 10px;
-
             }
         }
 

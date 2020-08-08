@@ -2,18 +2,17 @@
     <div class="notes-wrapper">
         <label>
             <input type="text" placeholder="添加备注" v-model="value">
-            <!--            <input type="text" placeholder="添加备注" :value="value" @input=" value = $event.target.value ">-->
         </label>
     </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Watch} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
 
   @Component
   export default class Notes extends Vue {
-    value = '';
+    @Prop({default: ''}) readonly value!: string;
 
     @Watch('value')
     onValueChanged(value: string) {

@@ -3,7 +3,7 @@
         <ol class="tags-list">
 
             <li v-for="tag in getCurrentTagList(recordType)" :key="tag.iconName"
-                @click="$emit('update:icon',tag)">
+                @click="$emit('update:tag',tag)">
                 <div>
                     <IconWithBorder :name=" tag.iconName "/>
                     <span>{{tag.tagText.slice(0,2)}}</span>
@@ -58,7 +58,7 @@
         } else if (oldTagList[i].type === '+') {
           incomeTagList.push(oldTagList[i]);
         } else {
-          return window.alert('unknown tag\'stype');
+          return window.alert('暂无标签，先新建标签吧！');
         }
       }
       if (type === '-') {

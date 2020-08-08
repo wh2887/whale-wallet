@@ -2,8 +2,8 @@
     <div class="moneyBG">
         <Tab :value.sync="record.type " :data-source="recordTypeList"/>
         <Output :update-icon="record.tags.iconName" :update-output="record.amount"/>
-        <Tags :record-type="record.type" @update:icon="onUpdateIcon"/>
-        <Notes :value='record.note' @update:value="onUpdateNote"/>
+        <Tags :record-type="record.type" @update:tag="onUpdateTag"/>
+        <Notes :value.sync='record.note'/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
     </div>
 </template>
@@ -46,14 +46,10 @@
       }
     }
 
-    onUpdateIcon(value: Tag) {
+    onUpdateTag(value: Tag) {
       this.record.tags.iconName = value.iconName;
       this.record.tags.tagText = value.tagText;
       this.record.tags.type = value.type;
-    }
-
-    onUpdateNote(value: string) {
-      this.record.note = value;
     }
 
     saveRecord() {
@@ -61,6 +57,7 @@
         window.alert('请选择一个图标分类！');
       } else {
         this.$store.commit('createRecord', this.record);
+        this.record.note = '';
       }
     }
   }
