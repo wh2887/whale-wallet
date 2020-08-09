@@ -98,14 +98,14 @@
 
     .tags-list {
         width: 87vw;
-        min-height: 21vh;
+        height: 21vh;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
 
         > li {
-            min-width: 38px;
-            min-height: 38px;
+            width: 38px;
+            height: 38px;
             margin: 23px 4vw 0 4vw;
 
             > span {

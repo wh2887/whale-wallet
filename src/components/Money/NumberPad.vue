@@ -11,10 +11,9 @@
         <button @click="inputContent">7</button>
         <button @click="inputContent">8</button>
         <button @click="inputContent">9</button>
-        <button @click="ok" class="ok">OK</button>
-        <button>+</button>
-        <button @click="inputContent">0</button>
         <button @click="inputContent">.</button>
+        <button @click="inputContent" class="zero">0</button>
+        <button @click="ok" class="ok">OK</button>
     </div>
 </template>
 
@@ -84,33 +83,46 @@
 
     .number-wrapper {
         @extend %clearFix;
-        width: 326px;
-        height: 322px;
+        width: 87vw;
         margin-top: 8px;
         border: 1px solid $color-d;
         border-radius: 10px;
         font-family: Consolas monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-grow: 1;
 
         > button {
-            width: 68px;
-            height: 68px;
-            border: none;
+            width: 25%;
+            height: 25%;
+            border: 1px solid $color-highlight;
             background: #E4E4E4;
-            border-radius: 10px;
-            margin: 6px;
             font-size: 1.5em;
-            float: left;
 
             &:active {
                 color: white;
                 background: $color-highlight;
             }
-
-            &.ok {
-                height: 68*2 + 10px;
-                float: right;
-                margin-right: 10px;
+            &:nth-child(1){
+                border-radius: 10px 0 0 0;
             }
+            &:nth-child(4){
+                border-radius: 0 10px 0 0;
+            }
+            &:nth-child(13){
+                border-radius: 0 0 0 10px;
+            }
+            &:nth-child(14){
+                border-radius: 0 0 10px 0;
+            }
+
+            &.zero, &.ok {
+                width: 50%;
+            }
+
+
         }
 
     }

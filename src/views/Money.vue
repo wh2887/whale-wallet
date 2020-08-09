@@ -5,6 +5,7 @@
         <Tags :record-type="record.type" @update:tag="onUpdateTag"/>
         <Notes :value.sync='record.note'/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
+        <div class="space"></div>
     </div>
 </template>
 
@@ -62,12 +63,14 @@
     }
   }
 </script>
-<style lang="scss">
-    .moneyBG {
-        display: flex;
-        flex-direction: column;
-    }
-</style>
 <style lang="scss" scoped>
 
+    .moneyBG ::v-deep{
+        display: flex;
+        flex-direction: column;
+        >.space{
+            width: 100%;
+            height: 12vh;
+        }
+    }
 </style>
