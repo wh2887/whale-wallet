@@ -2,7 +2,7 @@
     <div class="surplus-wrapper">
         <div>
             <span>7月结余</span>
-            <span>￥ 1500.00</span>
+            <span>￥ {{(total-money).toFixed(2)}}</span>
         </div>
         <Tab :value.sync="record.type" :data-source="recordTypeList" class-prefix="header"
              @click.native="getType(record.type)"/>
@@ -22,6 +22,8 @@
   })
   export default class DetailsHeader extends Vue {
     @Prop() type!: string;
+    @Prop(Number) money!: number;
+    total = 1500;
     record = defaultRecordList;
     recordTypeList = recordTypeList;
 

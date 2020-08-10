@@ -3,7 +3,7 @@
         <li v-for="(group,index) in dataSource" :key="index">
             <div class="top">
                 <h3>{{beautify(group.title)}}</h3>
-                <h3>支： ￥{{group.total.toFixed(2)}}</h3>
+                <h3>支： ￥{{getTotal(group.total)}}</h3>
             </div>
             <ol class="bottom" v-for="(item,index) in group.items" :key="index">
                 <div class="left">
@@ -28,7 +28,7 @@
 <script lang="ts">
   import Vue from 'vue';
   import dayjs from 'dayjs';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
   import IconWithBorder from '@/components/IconWithBorder.vue';
 
   @Component({
@@ -36,6 +36,18 @@
   })
   export default class DetailList extends Vue {
     @Prop() dataSource!: {}[];
+    useMoney = 0;
+
+
+    updated() {
+      this.$emit('update:value', this.useMoney);
+    }
+
+    getTotal(value: number) {
+      this.useMoney = value;
+      return value.toFixed(2);
+    }
+
 
     beautify(string: string) {
       const day = dayjs(string);

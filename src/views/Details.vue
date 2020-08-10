@@ -2,9 +2,9 @@
     <Layout :money-to-layout="show" @getReply="toggle">
         <Money v-show="show" class="money"/>
         <div class="details-wrapper">
-            <DetailsHeader :value="type" @update:value="onTypeChanged"/>
+            <DetailsHeader :value="type" @update:value="onTypeChanged" :money="useMoney"/>
             <div class="bottom">
-                <DetailList :data-source="groupedList"/>
+                <DetailList :data-source="groupedList" @update:value="onValueChanged"/>
             </div>
         </div>
     </Layout>
@@ -27,6 +27,7 @@
   export default class Details extends Vue {
     show = true;  //设置Money组件 默认是否显示 true默认显示 false默认不显示
     type = '-';
+    useMoney = 0;
 
     beforeCreate() {
       this.$store.commit('fetchRecords');
@@ -34,6 +35,10 @@
 
     onTypeChanged(value: string) {
       this.type = value;
+    }
+
+    onValueChanged(value: number) {
+      this.useMoney = value;
     }
 
     get recordList() {
@@ -99,6 +104,7 @@
         > .bottom {
             /*隐藏滚动条*/
             -ms-overflow-style: none;
+
             ::-webkit-scrollbar {
                 width: 0
             }
