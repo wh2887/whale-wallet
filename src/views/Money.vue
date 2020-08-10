@@ -3,7 +3,7 @@
         <Tab :value.sync="record.type " :data-source="recordTypeList"/>
         <Output :update-icon="record.tags.iconName" :update-output="record.amount"/>
         <Tags :record-type="record.type" @update:tag="onUpdateTag" class="tags"/>
-        <Notes @update:value="onUpdateNote"/>
+        <Notes :value="record.note" @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
         <div class="space"></div>
     </div>

@@ -1,6 +1,10 @@
 <template>
     <div class="tags-wrapper">
         <ol class="tags-list">
+            <li @click="$emit('update:tag',other)">
+                <IconWithBorder name="other"/>
+                <span>添加</span>
+            </li>
             <li v-for="tag in getCurrentTagList(recordType)" :key="tag.iconName"
                 @click="$emit('update:tag',tag)">
                 <IconWithBorder :name=" tag.iconName "/>
@@ -30,6 +34,12 @@
 
   export default class Tags extends Vue {
     @Prop() recordType!: string;
+    other: Tag = {
+      id: '',
+      iconName: 'other',
+      type: this.recordType,
+      tagText: '一般'
+    };
 
     created() {
       this.$store.commit('initTags');
