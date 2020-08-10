@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tags-wrapper">
         <ol class="tags-list">
             <li v-for="tag in getCurrentTagList(recordType)" :key="tag.iconName"
                 @click="$emit('update:tag',tag)">
@@ -30,9 +30,6 @@
 
   export default class Tags extends Vue {
     @Prop() recordType!: string;
-    currentPage = 1;
-    startPage = 0;
-    endPage = 6;
 
     created() {
       this.$store.commit('initTags');
@@ -54,7 +51,7 @@
         }
       }
       if (type === '-') {
-        return payTagList.filter((item, index) => index >= this.startPage && index <= this.endPage);
+        return payTagList;
       } else if (type === '+') {
         return incomeTagList;
       } else {
@@ -77,37 +74,38 @@
 <style lang="scss" scoped>
     @import "~@/assets/styles/helper.scss";
 
-    .tags-list {
-        width: 87vw;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        padding-top: 10px;
+    .tags-wrapper {
+        .tags-list {
+            width: 87vw;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding-top: 10px;
 
-        > li {
-            width: 38px;
-            height: 38px;
-            margin: 0 10px 28px 10px;
+            > li {
+                width: 38px;
+                height: 38px;
+                margin: 0 10px 28px 10px;
 
 
-            > span {
-                padding-top: 2px;
-                font-size: 0.8em;
+                > span {
+                    padding-top: 2px;
+                    font-size: 0.8em;
+                }
+            }
+
+            > .space {
+                margin: 0 10px;
+            }
+
+            > :last-child {
+                margin-right: auto;
+            }
+
+            > i {
+                min-width: 38px;
+                margin: 0 4vw;
             }
         }
-
-        > .space {
-            margin: 0 10px;
-        }
-
-        > :last-child {
-            margin-right: auto;
-        }
-
-        > i {
-            min-width: 38px;
-            margin: 0 4vw;
-        }
     }
-
 </style>

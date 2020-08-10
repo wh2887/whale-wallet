@@ -2,8 +2,8 @@
     <div class="moneyBG">
         <Tab :value.sync="record.type " :data-source="recordTypeList"/>
         <Output :update-icon="record.tags.iconName" :update-output="record.amount"/>
-        <Tags :record-type="record.type" @update:tag="onUpdateTag"/>
-        <Notes :value.sync='record.note'/>
+        <Tags :record-type="record.type" @update:tag="onUpdateTag" class="tags"/>
+        <Notes @update:value="onUpdateNote"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
         <div class="space"></div>
     </div>
@@ -53,24 +53,39 @@
       this.record.tags.type = value.type;
     }
 
+    onUpdateNote(value: string) {
+      this.record.note = value;
+    }
+
     saveRecord() {
       if (this.record.tags.iconName === '') {
         window.alert('请选择一个图标分类！');
       } else {
         this.$store.commit('createRecord', this.record);
-        this.record.note = '';
       }
     }
   }
 </script>
 <style lang="scss" scoped>
 
-    .moneyBG ::v-deep{
+    .moneyBG ::v-deep {
         display: flex;
         flex-direction: column;
-        >.space{
+
+        > .space {
             width: 100%;
             height: 12vh;
+        }
+
+        > .tags {
+            margin-top: 8px;
+            border-radius: 10px;
+            height: 21vh;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                display: none
+            }
         }
     }
 </style>
