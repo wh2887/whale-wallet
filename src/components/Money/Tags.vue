@@ -1,20 +1,19 @@
 <template>
     <div>
         <ol class="tags-list">
-
             <li v-for="tag in getCurrentTagList(recordType)" :key="tag.iconName"
                 @click="$emit('update:tag',tag)">
-                <div>
-                    <IconWithBorder :name=" tag.iconName "/>
-                    <span>{{tag.tagText.slice(0,2)}}</span>
-                </div>
+                <IconWithBorder :name=" tag.iconName "/>
+                <span>{{tag.tagText.slice(0,2)}}</span>
             </li>
-
             <li @click="addTags">
                 <IconWithBorder :name=" 'add' "/>
                 <span>添加</span>
             </li>
-            <i></i><i></i><i></i><i></i>
+            <i class="space"></i>
+            <i class="space"></i>
+            <i class="space"></i>
+            <i class="space"></i>
         </ol>
         <ul class="dots">
             <li :class="{selected:currentPage=== 1}" @click="selected(1)"></li>
@@ -98,19 +97,25 @@
 
     .tags-list {
         width: 87vw;
-        height: 21vh;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        padding-top: 10px;
 
         > li {
             width: 38px;
             height: 38px;
-            margin: 23px 4vw 0 4vw;
+            margin: 0 10px 28px 10px;
+
 
             > span {
-                padding-top: 4px;
+                padding-top: 2px;
+                font-size: 0.8em;
             }
+        }
+
+        > .space {
+            margin: 0 10px;
         }
 
         > :last-child {
@@ -128,7 +133,6 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding-top: 10px;
 
         > li {
             width: 10px;
@@ -136,6 +140,9 @@
             border-radius: 50%;
             background: $color-d;
             margin: 0 10px;
+
+            &.space {
+            }
 
             &.selected {
                 width: 18px;
