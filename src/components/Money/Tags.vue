@@ -15,11 +15,6 @@
             <i class="space"></i>
             <i class="space"></i>
         </ol>
-        <ul class="dots">
-            <li :class="{selected:currentPage=== 1}" @click="selected(1)"></li>
-            <li :class="{selected:currentPage=== 2}" @click="selected(2)"></li>
-            <li :class="{selected:currentPage=== 3}" @click="selected(3)"></li>
-        </ul>
     </div>
 </template>
 
@@ -56,14 +51,14 @@
           payTagList.push(oldTagList[i]);
         } else if (oldTagList[i].type === '+') {
           incomeTagList.push(oldTagList[i]);
-        } else {
-          return window.alert('暂无标签，先新建标签吧！');
         }
       }
       if (type === '-') {
         return payTagList.filter((item, index) => index >= this.startPage && index <= this.endPage);
       } else if (type === '+') {
         return incomeTagList;
+      } else {
+        return;
       }
     }
 
@@ -75,19 +70,6 @@
       }
     }
 
-    selected(page: number) {
-      this.currentPage = page;
-      if (this.currentPage === 1) {
-        this.startPage = 0;
-        this.endPage = 6;
-      } else if (this.currentPage === 2) {
-        this.startPage = 7;
-        this.endPage = 13;
-      } else if (this.currentPage === 3) {
-        this.startPage = 14;
-        this.endPage = 21;
-      }
-    }
 
   }
 </script>
@@ -128,28 +110,4 @@
         }
     }
 
-    .dots {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        > li {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: $color-d;
-            margin: 0 10px;
-
-            &.space {
-            }
-
-            &.selected {
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                background: $color-highlight;
-            }
-        }
-    }
 </style>
