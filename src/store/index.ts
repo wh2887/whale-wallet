@@ -9,6 +9,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
+    createRecordError: null,
     tagList: [] as Tag[],
     currentTag: undefined
   } as RootState,
@@ -20,7 +21,7 @@ const store = new Vuex.Store({
       state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
     },
     createRecord(state, record: RecordItem) {
-      const record2: RecordItem = clone(record);
+      const record2 = clone(record);
       record2.createdAt = new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords');
@@ -31,6 +32,10 @@ const store = new Vuex.Store({
 
     initTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+      if (!state.tagList || state.tagList.length === 0) {
+        store.commit('createTag', {id: '', iconName: 'sancan', type: '-', tagText: '餐饮'});
+        store.commit('createTag', {id: '', iconName: 'hongBao', type: '+', tagText: '红包'});
+      }
     },
     createTag(state, obj: Tag) {
       const names = state.tagList.map(item => item.iconName);
@@ -44,7 +49,6 @@ const store = new Vuex.Store({
         state.tagList && state.tagList.push(obj);
         // 可选链语法：  this.tagList?.push(obj);
         store.commit('saveTags');
-        window.alert('添加成功！');
       }
     },
     updateTag(state, payload: { id: string; iconName: string; tagText: string }) {
@@ -65,7 +69,7 @@ const store = new Vuex.Store({
             window.alert('标签图标不能为空，请重新输入！');
           } else if (tagText === '') {
             window.alert('标签名不能为空，请重新输入！');
-          }else {
+          } else {
             tag.iconName = iconName;
             tag.id = id;
             tag.tagText = tagText;

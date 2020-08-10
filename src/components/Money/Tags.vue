@@ -3,7 +3,7 @@
         <ol class="tags-list">
             <li @click="$emit('update:tag',other)">
                 <IconWithBorder name="other"/>
-                <span>添加</span>
+                <span>一般</span>
             </li>
             <li v-for="tag in getCurrentTagList(recordType)" :key="tag.iconName"
                 @click="$emit('update:tag',tag)">

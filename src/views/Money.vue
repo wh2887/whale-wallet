@@ -3,7 +3,7 @@
         <Tab :value.sync="record.type " :data-source="recordTypeList"/>
         <Output :update-icon="record.tags.iconName" :update-output="record.amount"/>
         <Tags :record-type="record.type" @update:tag="onUpdateTag" class="tags"/>
-        <Notes :value="record.note" @update:value="onUpdateNote"/>
+        <Notes :value.sync="record.note"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
         <div class="space"></div>
     </div>
@@ -62,6 +62,9 @@
         window.alert('请选择一个图标分类！');
       } else {
         this.$store.commit('createRecord', this.record);
+        if (this.$store.state.createRecordError === null) {
+          window.alert('已保存');
+        }
       }
     }
   }

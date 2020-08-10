@@ -3,7 +3,7 @@
         <li v-for="(group,index) in dataSource" :key="index">
             <div class="top">
                 <h3>{{beautify(group.title)}}</h3>
-                <h3>支： ￥{{group.total}}</h3>
+                <h3>支： ￥{{group.total.toFixed(2)}}</h3>
             </div>
             <ol class="bottom" v-for="(item,index) in group.items" :key="index">
                 <div class="left">
