@@ -10,10 +10,11 @@
                 <IconWithBorder :name=" 'add' "/>
                 <span>添加</span>
             </li>
-            <i class="space"></i>
-            <i class="space"></i>
-            <i class="space"></i>
-            <i class="space"></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
         </ol>
         <ul class="dots">
             <li :class="{selected:currentPage=== 1}" @click="selected(1)"></li>
@@ -114,9 +115,6 @@
             }
         }
 
-        > .space {
-            margin: 0 10px;
-        }
 
         > :last-child {
             margin-right: auto;
@@ -124,7 +122,7 @@
 
         > i {
             min-width: 38px;
-            margin: 0 4vw;
+            margin: 0 10px;
         }
     }
 
