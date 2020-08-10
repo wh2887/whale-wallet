@@ -20,6 +20,7 @@
         </li>
     </ol>
     <div v-else class="no-detail-list">
+        <Icon name="whale" class="no-detail-icon"/>
         目前没有相关记录
     </div>
 </template>
@@ -108,6 +109,12 @@
 
     .no-detail-list {
         padding: 16px;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        > .no-detail-icon {
+            font-size: 4em;
+        }
     }
 </style>
