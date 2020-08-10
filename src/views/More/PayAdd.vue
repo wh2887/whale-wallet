@@ -62,8 +62,14 @@
       const tagText = this.tagText;
       const obj = {id, iconName, type, tagText};
       if (obj) {
-        this.$store.commit('createTag', obj);
-        this.$router.back();
+        if (obj.iconName === '') {
+          window.alert('请选择一个分类图标！');
+        } else if (obj.tagText === '') {
+          window.alert('请输入备注！');
+        } else {
+          this.$store.commit('createTag', obj);
+          this.$router.back();
+        }
       }
     }
   }

@@ -61,10 +61,16 @@ const store = new Vuex.Store({
           window.alert('标签名重复！请重新输入标签名！');
         } else {
           const tag = state.tagList.filter(item => item.id === id)[0];
-          tag.iconName = iconName;
-          tag.id = id;
-          tag.tagText = tagText;
-          store.commit('saveTags');
+          if (iconName === '') {
+            window.alert('标签图标不能为空，请重新输入！');
+          } else if (tagText === '') {
+            window.alert('标签名不能为空，请重新输入！');
+          }else {
+            tag.iconName = iconName;
+            tag.id = id;
+            tag.tagText = tagText;
+            store.commit('saveTags');
+          }
         }
       }
     },

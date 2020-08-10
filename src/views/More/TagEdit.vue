@@ -56,7 +56,7 @@
           iconName: this.selectedIcon,
           tagText: this.currentTag.tagText
         });
-        this.$router.back();
+          this.$router.back();
       }
     }
   }
