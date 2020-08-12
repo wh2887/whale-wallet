@@ -3,7 +3,7 @@
         <Tab :value.sync="record.type " :data-source="recordTypeList"/>
         <Output :update-icon="record.tags.iconName" :update-output="record.amount"/>
         <Tags :record-type="record.type" @update:tag="onUpdateTag" class="tags"/>
-        <Notes :value.sync="record.note"/>
+        <Notes :value.sync="record.note" class="notes"/>
         <NumberPad :value.sync="record.amount" @submit="saveRecord"/>
         <div class="space"></div>
     </div>
@@ -75,12 +75,18 @@
         display: flex;
         flex-direction: column;
 
+
+        > .notes {
+            width: 87%;
+        }
+
         > .space {
             width: 100%;
             height: 12vh;
         }
 
         > .tags {
+            width: 87%;
             margin-top: 8px;
             border-radius: 10px;
             height: 21vh;

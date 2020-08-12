@@ -23,7 +23,7 @@
   export default class DetailsHeader extends Vue {
     @Prop() type!: string;
     @Prop(Number) money!: number;
-    total = 1500;
+    total = this.$store.state.monthlyBudget;
     record = defaultRecordList;
     recordTypeList = recordTypeList;
 
@@ -38,7 +38,7 @@
 <style lang="scss" scoped>
 
     .surplus-wrapper {
-        width: 90vw;
+        width: 90%;
         height: 15vh;
         background: white;
         border-radius: 10px;
@@ -48,7 +48,7 @@
         > :first-child {
             display: flex;
             flex-direction: column;
-            margin-top: 10px;
+            margin-top: 1.3vh;
 
             > :first-child {
                 font-size: 0.6em;

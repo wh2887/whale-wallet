@@ -34,7 +34,6 @@
 
         > label {
 
-            width: 87vw;
 
             > input {
                 width: 100%;

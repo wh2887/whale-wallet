@@ -71,6 +71,7 @@
 
 <style lang="scss" scoped>
     .list {
+        width: 100%;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
@@ -79,7 +80,7 @@
         padding-bottom: 18vh;
 
         > li {
-            width: 90vw;
+            width: 100%;
             background: white;
             border-radius: 10px;
             padding: 10px;

@@ -10,6 +10,7 @@ const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
     createRecordError: null,
+    monthlyBudget: 1500,
     tagList: [] as Tag[],
     currentTag: undefined
   } as RootState,

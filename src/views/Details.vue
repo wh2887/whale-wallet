@@ -1,7 +1,7 @@
 <template>
-    <Layout :money-to-layout="show" @getReply="toggle">
+    <Layout :money-to-layout="show" @getReply="toggle" class-prefix="details">
         <Money v-show="show" class="money"/>
-        <div class="details-wrapper">
+        <div class="detail-wrapper">
             <DetailsHeader :value="type" @update:value="onTypeChanged" :money="useMoney"/>
             <div class="bottom">
                 <DetailList :data-source="groupedList" @update:value="onValueChanged"/>
@@ -77,43 +77,52 @@
 </script>
 
 <style lang="scss" scoped>
-    .money ::v-deep {
-        position: absolute;
-        bottom: 0;
-        z-index: 1;
-        width: 100vw;
-        height: 96vh;
-        display: flex;
-        align-items: center;
-        background: #ffffff;
-        border-radius: 36px 36px 0 0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    }
-
-    .details-wrapper {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 14px;
-        overflow: auto;
-
-        > :first-child {
-        }
-
-        > .bottom {
-            /*隐藏滚动条*/
-            -ms-overflow-style: none;
-
-            ::-webkit-scrollbar {
-                width: 0
+    .details-wrapper ::v-deep{
+        position: relative;
+        .details-content{
+            width: 100%;
+            > .money {
+                z-index: 1;
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+                height: 96vh;
+                display: flex;
+                align-items: center;
+                background: #ffffff;
+                border-radius: 36px 36px 0 0;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
             }
 
-            border-radius: 10px;
-            position: fixed;
-            top: 18vh;
-            overflow: hidden;
-            height: 100%;
+            .detail-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 14px;
+                overflow: auto;
+
+                > :first-child {
+                }
+
+                > .bottom {
+                    width: 90%;
+                    /*隐藏滚动条*/
+                    -ms-overflow-style: none;
+
+                    ::-webkit-scrollbar {
+                        width: 0
+                    }
+
+                    border-radius: 10px;
+                    overflow: hidden;
+                    height: 100%;
+                }
+            }
+
         }
+
     }
+
 </style>

@@ -71,9 +71,9 @@
 
     addTags() {
       if (this.recordType === '-') {
-        this.$router.push({path: '/more/payedit', query: {type: '-'}});
+        this.$router.push({path: '/more/payedit'});
       } else if (this.recordType === '+') {
-        this.$router.push({path: '/more/incomeedit', query: {type: '+'}});
+        this.$router.push({path: '/more/incomeedit'});
       }
     }
 
@@ -86,7 +86,6 @@
 
     .tags-wrapper {
         .tags-list {
-            width: 87vw;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;

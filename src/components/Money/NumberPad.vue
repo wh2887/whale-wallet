@@ -83,7 +83,7 @@
 
     .number-wrapper {
         @extend %clearFix;
-        width: 87vw;
+        width: 87%;
         margin-top: 8px;
         border: 1px solid $color-d;
         border-radius: 10px;

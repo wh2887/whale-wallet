@@ -49,6 +49,11 @@
         border: 1px solid $color-highlight;
         border-radius: 10px;
 
+        @media(min-width: 320px) {
+            line-height: 1.6em;
+            margin: 6px auto 0;
+        }
+
         li:first-child {
             border-radius: 10px 0 0 10px;
         }
@@ -58,7 +63,7 @@
         }
 
         > li {
-            padding: 0 35px 0 35px;
+            padding: 0 2rem 0 2rem;
             white-space: nowrap;
 
             &.selected {

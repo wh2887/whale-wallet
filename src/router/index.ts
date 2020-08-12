@@ -32,7 +32,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/more',
-    component: More
+    component: More,
   },
   {
     path: '/more/payedit',
